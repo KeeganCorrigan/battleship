@@ -28,11 +28,15 @@ class Text
   end
 
   def begin_play_text
-    "I have laid out my ships on the grid."
-    "You now need to layout your two ships."
-    "The first is two units long and the"
-    "second is three units long."
-    "The grid has A1 at the top left and D4 at the bottom right."
+    puts "I have laid out my ships on the grid."
+    puts "You now need to layout your two ships."
+    puts "The first is two units long and the"
+    puts "second is three units long."
+    puts "The grid has A1 at the top left and D4 at the bottom right."
+  end
+
+  def invalid_starting_choice_text
+    puts "Listen to my directions better."
   end
 
   def player_places_two_unit_ship_text
@@ -98,4 +102,5 @@ class Text
   def number_of_guesses_and_time_text
     #add interpolation for guesses and time
     puts "You took this many guesses and it took this long"
+  end
 end
