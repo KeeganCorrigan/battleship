@@ -33,4 +33,10 @@ class CellTest < Minitest::Test
     # something happens here that means it has a ship!
     assert_equal true, cell.ship?
   end
+
+  def test_it_starts_with_default_state
+    cell = Cell.new("A1")
+    binding.pry
+    assert_equal '^', cell.state
+  end
 end
