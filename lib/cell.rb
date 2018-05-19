@@ -10,7 +10,7 @@ class Cell
     @state = state
     @hit = false
     @miss = false
-    @ship = false
+    @ship = nil
   end
 
   def default_state
@@ -18,14 +18,14 @@ class Cell
   end
 
   def hit_state
-    # if player_input is true && ship is true
-    'H'
-    #can not change state once hit_state is chosen
+    if @ship == true
+      'H'
+    end
   end
 
   def miss_state
-    # if player_input is true && ship is not true
-    'M'
-    #can not change state once miss_state is chosen
+    if @ship == false
+      'M'
+    end
   end
 end
