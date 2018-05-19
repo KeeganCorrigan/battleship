@@ -28,29 +28,22 @@ class GameLogicTest < Minitest::Test
     # need to test random second coordinate selection. It seems to work, but need an effective way to test 1 of 2 possibilities.
   end
 
-  def test_horizontal_ship_with_0_index
+  def test_horizontal_ship_2
     game = GameLogic.new
     assert_equal [2,1], game.horizontal_ship(2, [2,0])
-  end
-
-  def test_horizontal_ship_with_3_index
-    game = GameLogic.new
     assert_equal [2,2], game.horizontal_ship(2, [2,3])
   end
 
-  def test_vertical_ship_with_0_index
+  def test_vertical_ship_2
     game = GameLogic.new
     assert_equal [1,2], game.vertical_ship(2, [0,2])
-  end
-
-  def test_vertical_ship_with_3_index
-    game = GameLogic.new
     assert_equal [2,2], game.vertical_ship(2, [3,2])
   end
 
   def test_generates_first_and_second_coordinates_for_2_ship
     game = GameLogic.new
-    game.create_2_ship_coordinates
+    ship_2 = Ship.new(2)
+    game.create_2_ship_coordinates(ship_2)
     assert_equal Array, game.first_coordinates.class
     assert_equal Array, game.second_coordinates.class
     assert_equal 2, game.first_coordinates.length
@@ -58,12 +51,48 @@ class GameLogicTest < Minitest::Test
     assert_equal true, game.second_coordinates && [0, 1, 2, 3].any?
   end
 
-  def place_computer_ship
+  def test_horizontal_3_ship
     game = GameLogic.new
-    computer_board = GameBoard.new
-    gameboard.create_board
-    assert_equal true, game.board_array.cell([0,1]).ship
+    assert_equal [0, 2], game.horizontal_ship(3, [0, 0])
+    assert_equal [0, 3], game.horizontal_ship(3, [0, 1])
+    assert_equal [0, 0], game.horizontal_ship(3, [0, 2])
+    assert_equal [0, 1], game.horizontal_ship(3, [0, 3])
+    assert_equal [1, 2], game.horizontal_ship(3, [1, 0])
+    assert_equal [1, 3], game.horizontal_ship(3, [1, 1])
+    assert_equal [1, 0], game.horizontal_ship(3, [1, 2])
+    assert_equal [1, 1], game.horizontal_ship(3, [1, 3])
+    assert_equal [2, 2], game.horizontal_ship(3, [2, 0])
+    assert_equal [2, 3], game.horizontal_ship(3, [2, 1])
+    assert_equal [2, 0], game.horizontal_ship(3, [2, 2])
+    assert_equal [2, 1], game.horizontal_ship(3, [2, 3])
+    assert_equal [3, 2], game.horizontal_ship(3, [3, 0])
+    assert_equal [3, 3], game.horizontal_ship(3, [3, 1])
+    assert_equal [3, 0], game.horizontal_ship(3, [3, 2])
+    assert_equal [3, 1], game.horizontal_ship(3, [3, 3])
   end
 
+  def test_vertical_ship_3
+    game = GameLogic.new
+    assert_equal [2, 0], game.vertical_ship(3, [0, 0])
+    assert_equal [2, 1], game.vertical_ship(3, [0, 1])
+    assert_equal [2, 2], game.vertical_ship(3, [0, 2])
+    assert_equal [2, 3], game.vertical_ship(3, [0, 3])
+    assert_equal [3, 0], game.vertical_ship(3, [1, 0])
+    assert_equal [3, 1], game.vertical_ship(3, [1, 1])
+    assert_equal [3, 2], game.vertical_ship(3, [1, 2])
+    assert_equal [3, 3], game.vertical_ship(3, [1, 3])
+    assert_equal [0, 1], game.vertical_ship(3, [2, 1])
+    assert_equal [0, 2], game.vertical_ship(3, [2, 2])
+    assert_equal [0, 3], game.vertical_ship(3, [2, 3])
+    assert_equal [1, 0], game.vertical_ship(3, [3, 0])
+    assert_equal [1, 1], game.vertical_ship(3, [3, 1])
+    assert_equal [1, 2], game.vertical_ship(3, [3, 2])
+    assert_equal [1, 3], game.vertical_ship(3, [3, 3])
+  end
 
+  def test_generates_first_and_second_coordinates_for_3_ship
+    skip
+    game = GameLogic.new
+    ship_2 = Ship.new(3)
+  end
 end
