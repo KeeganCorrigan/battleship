@@ -1,10 +1,10 @@
 require './lib/cell'
+require 'pry'
 
 class GameBoard
-  attr_reader :cell, :board_array
+  attr_reader :board_array
 
-  def initialize(cell = nil)
-    @cell = cell
+  def initialize
     @board_array = []
   end
 
@@ -27,8 +27,3 @@ class GameBoard
           ===========\n"
   end
 end
-
-board = GameBoard.new
-
-board.create_board
-board.display_board
