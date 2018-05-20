@@ -85,5 +85,30 @@ class GameFlowTest < Minitest::Test
     game = GameFlow.new
     input = "A1 A3"
     assert_equal 2, game.get_player_2_ship_placement_choice(input).length
+    assert_equal Array, game.get_player_2_ship_placement_choice(input).class
+  end
+
+  def test_change_player_ship_placement_to_positions
+    game = GameFlow.new
+    input = ["A1", "A3"]
+    assert_equal [[0,0], [0,2]], game.change_player_ship_placement_to_positions(input)
+    input = ["D4", "D1"]
+    assert_equal [[3, 0], [3, 3]], game.change_player_ship_placement_to_positions(input)
+  end
+
+  def test_verify_player_ship_horizontal_vertical_placement
+    game = GameFlow.new
+    player_cells = [[0,0], [0,2]]
+    assert_equal true, game.verify_player_horizontal_vertical_placement(player_cells)
+    player_cells = [[1,0], [0,2]]
+    assert_equal false, game.verify_player_horizontal_vertical_placement(player_cells)
+  end
+
+  def test_validate_player_ship_length
+    skip
+    game = GameFlow.new
+    player_ship = Ship.new(2)
+    player_cells = [[0,0], [0,2]]
+    assert_equal false, game.validate_player_ship_length(player_cells)
   end
 end

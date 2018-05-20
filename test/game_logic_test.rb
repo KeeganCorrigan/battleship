@@ -129,4 +129,6 @@ class GameLogicTest < Minitest::Test
     assert_equal 2, game.second_coordinates.length
     assert_equal 2, game.third_coordinates.length
   end
+
+  
 end

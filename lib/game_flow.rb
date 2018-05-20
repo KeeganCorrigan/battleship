@@ -52,11 +52,8 @@ def quit_play_or_read
   end
   def place_computer_2_ship
     @game_logic.create_ship_coordinates(comp_ship_2)
-
     @computer_board[@game_logic.first_coordinates[0]][@game_logic.first_coordinates[1]].ship = comp_ship_2
-
     @computer_board[@game_logic.second_coordinates[0]][@game_logic.second_coordinates[1]].ship = comp_ship_2
-
   end
 
   def place_computer_3_ship
@@ -89,8 +86,28 @@ def quit_play_or_read
       return input.upcase.split(" ")
     end
   end
+
+  def change_player_ship_placement_to_positions(player_cell_choice)
+    player_cell_array = []
+    @player_board.each_with_index do |row, index_1|
+      row.each_with_index do |cell, index_2|
+        player_cell_choice.each do |choice|
+          player_cell_array << [index_1, index_2] if cell.position == choice
+        end
+      end
+    end
+    return player_cell_array
+  end
+
+  def verify_player_horizontal_vertical_placement(player_cells)
+    if player_cells[0][0] == player_cells[1][0] || player_cells[0][1] == player_cells[1][1]
+      return true
+    else
+      return false
+    end
+  end
+
+  def validate_player_ship_length
+    
+  end
 end
-#
-# game = GameFlow.new
-#
-# game.start
