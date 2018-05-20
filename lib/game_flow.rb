@@ -76,7 +76,7 @@ def get_starting_input
       return false
     end
     else
-      return true 
+      return true
   end
 end
 #

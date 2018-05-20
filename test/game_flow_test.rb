@@ -63,5 +63,21 @@ class GameFlowTest < Minitest::Test
       end
     end
     assert_equal 5, five_cells_with_ship.sum
+    game = GameFlow.new
+    game.place_computer_2_ship
+    game.place_computer_3_ship
+    assert_equal 5, five_cells_with_ship.sum
+    game = GameFlow.new
+    game.place_computer_2_ship
+    game.place_computer_3_ship
+    assert_equal 5, five_cells_with_ship.sum
+    game = GameFlow.new
+    game.place_computer_2_ship
+    game.place_computer_3_ship
+    assert_equal 5, five_cells_with_ship.sum
+    game = GameFlow.new
+    game.place_computer_2_ship
+    game.place_computer_3_ship
+    assert_equal 5, five_cells_with_ship.sum
   end
 end
