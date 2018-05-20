@@ -18,6 +18,7 @@ class GameFlowTest < Minitest::Test
   end
 
   def test_place_computer_2_ship
+    skip
     new_game = GameFlow.new
     new_game.place_computer_2_ship
     any_cell_has_ship =

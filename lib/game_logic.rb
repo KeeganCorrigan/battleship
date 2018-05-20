@@ -47,9 +47,8 @@ class GameLogic
     @first_coordinates = first_coordinate_picker
     @second_coordinates = [horizontal_ship(ship.length, first_coordinates), vertical_ship(ship.length, first_coordinates)].sample
     if ship.length == 3
-      @third_coordinates = generate_ship_3_middle_coordinate(first_coordinates, second_coordinates, ship.length)
+      @third_coordinates = generate_ship_3_middle_coordinate(first_coordinates, second_coordinates)
     end
-    binding.pry
   end
 
   def generate_ship_3_middle_coordinate(first_coordinates, second_coordinates)
