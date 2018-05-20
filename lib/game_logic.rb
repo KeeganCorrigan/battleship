@@ -39,31 +39,40 @@ class GameLogic
       coordinate - (ship_size - 1)
     elsif ship_size == 3 && coordinate == 1
       coordinate + (ship_size - 1)
-    else [(coordinate + (ship_size - 1)), (coordinate -   (ship_size - 1))].sample
+    else [(coordinate + (ship_size - 1)), (coordinate - (ship_size - 1))].sample
     end
   end
 
-  def create_2_ship_coordinates(ship_2)
+  def create_ship_coordinates(ship)
     @first_coordinates = first_coordinate_picker
-    @second_coordinates = [horizontal_ship(ship_2.length, first_coordinates), vertical_ship(ship_2.length, first_coordinates)].sample
+    @second_coordinates = [horizontal_ship(ship.length, first_coordinates), vertical_ship(ship.length, first_coordinates)].sample
+    if ship.length == 3
+      @third_coordinates = generate_ship_3_middle_coordinate(first_coordinates, second_coordinates, ship.length)
+    end
+    binding.pry
   end
 
-  def create_3_ship_coordinates(ship_3)
-    @first_coordinates = first_coordinate_picker
-    @second_coordinates = [horizontal_ship(ship_3.length, first_coordinates), vertical_ship(ship_3.length, first_coordinates)].sample
-    @third_coordinates
-  end
-
-
-  def generate_ship_3_middle_coordinate(first_coordinates, second_coordinates, ship_3)
+  def generate_ship_3_middle_coordinate(first_coordinates, second_coordinates)
     third_coordinates = first_coordinates.map.with_index do |position, index|
       if position - second_coordinates[index] == 0
         position
-      elsif position == 0
-        (second_coordinates[index] - ship_3.length).abs
       else
-        (position - second_coordinates[index]).abs
+        sorted = [position, second_coordinates[index]].sort
+        sorted = (sorted[0]..sorted[1]).to_a
+        sorted.delete(position)
+        sorted.delete(second_coordinates[index])
+        sorted
       end
     end
+    return third_coordinates.flatten
   end
+
+    #   elsif position == 0 && second_coordinates[index] != 0
+    #     (second_coordinates[index] - (ship_size + 1).abs
+    #   elsif position == 0
+    #
+    #   else
+    #     (position - second_coordinates[index]).abs
+    #   end
+    # end
 end

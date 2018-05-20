@@ -50,15 +50,19 @@ def get_starting_input
   #
   # def computer_places_ship
   def place_computer_2_ship
-    @game_logic.create_2_ship_coordinates(comp_ship_2)
+    @game_logic.create_ship_coordinates(comp_ship_2)
     @computer_board[@game_logic.first_coordinates[0]][@game_logic.first_coordinates[1]].ship = comp_ship_2
-    @computer_board[@game_logic.first_coordinates[0]][@game_logic.first_coordinates[1]].ship = comp_ship_2
+    @computer_board[@game_logic.second_coordinates[0]][@game_logic.second_coordinates[1]].ship = comp_ship_2
   end
 
   def place_computer_3_ship
-    @game_logic.create_2_ship_coordinates(comp_ship_3)
+    @game_logic.create_ship_coordinates(comp_ship_3)
     @computer_board[@game_logic.first_coordinates[0]][@game_logic.first_coordinates[1]].ship = comp_ship_3
-    @computer_board[@game_logic.first_coordinates[0]][@game_logic.first_coordinates[1]].ship = comp_ship_3
+    binding.pry
+    @computer_board[@game_logic.second_coordinates[0]][@game_logic.second_coordinates[1]].ship = comp_ship_3
+    binding.pry
+    @computer_board[@game_logic.third_coordinates[0]][@game_logic.third_coordinates[1]].ship = comp_ship_3
+    binding.pry
   end
 end
 #

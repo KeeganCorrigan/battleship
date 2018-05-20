@@ -28,4 +28,16 @@ class GameFlowTest < Minitest::Test
     end
     assert_equal true, any_cell_has_ship
   end
+
+  def test_place_computer_3_ship
+    new_game = GameFlow.new
+    new_game.place_computer_3_ship
+    any_cell_has_ship =
+    new_game.computer_board.any? do |row|
+      row.any? do |cell|
+        cell.ship
+      end
+    end
+    assert_equal true, any_cell_has_ship
+  end
 end
