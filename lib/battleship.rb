@@ -69,6 +69,9 @@ until valid_input == true
 end
 
 game.place_player_3_ship(cell_1, cell_2, cell_3, game.player_ship_3)
-binding.pry
-p game.text.player_firing_turn
-game.computer_board.display
+
+until game.comp_ship_2.length == 0 && game.comp_ship_3.length == 0 || game.player_ship_2.length == 0 && game.player_ship_3.length == 0
+  p game.text.player_firing_turn
+  input = game.
+  game.display_board(game.computer_board)
+  p game.text.player_firing_turn
