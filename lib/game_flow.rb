@@ -50,25 +50,33 @@ def get_starting_input
 
   def place_computer_2_ship
     @game_logic.create_ship_coordinates(comp_ship_2)
+
     @computer_board[@game_logic.first_coordinates[0]][@game_logic.first_coordinates[1]].ship = comp_ship_2
+
     @computer_board[@game_logic.second_coordinates[0]][@game_logic.second_coordinates[1]].ship = comp_ship_2
+
   end
 
   def place_computer_3_ship
-    @game_logic.create_ship_coordinates(comp_ship_3)
-    first_ship_cell = @computer_board[@game_logic.first_coordinates[0]][@game_logic.first_coordinates[1]]
-    verify_no_ship_in_cell(first_ship_cell)
-    second_ship_cell = @computer_board[@game_logic.second_coordinates[0]][@game_logic.second_coordinates[1]]
-    verify_no_ship_in_cell(second_ship_cell)
-    third_ship_cell = @computer_board[@game_logic.third_coordinates[0]][@game_logic.third_coordinates[1]]
-    verify_no_ship_in_cell(third_ship_cell)
+    no_overlapping_ships = false
+    until no_overlapping_ships == true
+      @game_logic.create_ship_coordinates(comp_ship_3)
+      first_ship_cell =    @computer_board[@game_logic.first_coordinates[0]][@game_logic.first_coordinates[1]]
+      second_ship_cell = @computer_board[@game_logic.second_coordinates[0]][@game_logic.second_coordinates[1]]
+      third_ship_cell = @computer_board[@game_logic.third_coordinates[0]][@game_logic.third_coordinates[1]]
+      no_overlapping_ships = verify_no_ship_in_cell(first_ship_cell, second_ship_cell, third_ship_cell)
+    end
     first_ship_cell.ship = comp_ship_3
     second_ship_cell.ship = comp_ship_3
     third_ship_cell.ship = comp_ship_3
   end
 
-  def verify_no_ship_in_cell(cell_position)
-    place_computer_3_ship if cell_position.ship == true
+  def verify_no_ship_in_cell(cell1, cell2, cell3)
+    if cell1.ship || cell2.ship || cell3.ship != nil
+      return false
+    end
+    else
+      return true 
   end
 end
 #

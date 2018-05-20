@@ -30,8 +30,13 @@ class GameLogicTest < Minitest::Test
 
   def test_horizontal_ship_2
     game = GameLogic.new
+    assert_equal [0,1], game.horizontal_ship(2, [0,0])
+    assert_equal [0,2], game.horizontal_ship(2, [0,3])
+    assert_equal [1,1], game.horizontal_ship(2, [1,0])
+    assert_equal [1,2], game.horizontal_ship(2, [1,3])
     assert_equal [2,1], game.horizontal_ship(2, [2,0])
     assert_equal [2,2], game.horizontal_ship(2, [2,3])
+    assert_equal [2,1], game.horizontal_ship(2, [2,0])
   end
 
   def test_vertical_ship_2
@@ -41,7 +46,6 @@ class GameLogicTest < Minitest::Test
   end
 
   def test_generates_first_and_second_coordinates_for_2_ship
-    skip
     game = GameLogic.new
     ship_2 = Ship.new(2)
     game.create_ship_coordinates(ship_2)

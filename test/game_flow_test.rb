@@ -52,4 +52,16 @@ class GameFlowTest < Minitest::Test
     end
     assert_equal 3, three_cells_have_ships.sum
   end
+
+  def test_can_not_place_ships_on_other_ships
+    game = GameFlow.new
+    game.place_computer_2_ship
+    game.place_computer_3_ship
+    five_cells_with_ship = game.computer_board.map do |row|
+      row.count do |cell|
+        cell.ship
+      end
+    end
+    assert_equal 5, five_cells_with_ship.sum
+  end
 end
