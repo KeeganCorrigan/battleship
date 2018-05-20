@@ -105,10 +105,13 @@ class GameFlowTest < Minitest::Test
   end
 
   def test_validate_player_ship_length
-    skip
     game = GameFlow.new
     player_ship = Ship.new(2)
     player_cells = [[0,0], [0,2]]
-    assert_equal false, game.validate_player_ship_length(player_cells)
+    assert_equal false, game.validate_player_ship_length(player_cells, player_ship)
+    player_ship = Ship.new(3)
+    player_cells = [[0,0], [0,2]]
+    assert_equal true,
+    game.validate_player_ship_length(player_cells, player_ship)
   end
 end

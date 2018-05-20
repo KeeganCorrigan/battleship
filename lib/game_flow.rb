@@ -107,7 +107,17 @@ def quit_play_or_read
     end
   end
 
-  def validate_player_ship_length
-    
+  def validate_player_ship_length(player_cells, ship)
+    if (player_cells[0][0] - player_cells[1][0]).abs == (ship.length - 1) || (player_cells[0][1] - player_cells[1][1]).abs == (ship.length - 1)
+      return true
+    else
+      return false
+    end
   end
 end
+  #
+  # def validate_player_ship_length(player_cells, ship)
+  #   player_cells.map.with_index do |position, index|
+  #     position|index| - position|index + 1|
+  #   end
+  # end
