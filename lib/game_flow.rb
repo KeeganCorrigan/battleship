@@ -56,9 +56,19 @@ def get_starting_input
 
   def place_computer_3_ship
     @game_logic.create_ship_coordinates(comp_ship_3)
-    @computer_board[@game_logic.first_coordinates[0]][@game_logic.first_coordinates[1]].ship = comp_ship_3
-    @computer_board[@game_logic.second_coordinates[0]][@game_logic.second_coordinates[1]].ship = comp_ship_3
-    @computer_board[@game_logic.third_coordinates[0]][@game_logic.third_coordinates[1]].ship = comp_ship_3
+    first_ship_cell = @computer_board[@game_logic.first_coordinates[0]][@game_logic.first_coordinates[1]]
+    verify_no_ship_in_cell(first_ship_cell)
+    second_ship_cell = @computer_board[@game_logic.second_coordinates[0]][@game_logic.second_coordinates[1]]
+    verify_no_ship_in_cell(second_ship_cell)
+    third_ship_cell = @computer_board[@game_logic.third_coordinates[0]][@game_logic.third_coordinates[1]]
+    verify_no_ship_in_cell(third_ship_cell)
+    first_ship_cell.ship = comp_ship_3
+    second_ship_cell.ship = comp_ship_3
+    third_ship_cell.ship = comp_ship_3
+  end
+
+  def verify_no_ship_in_cell(cell_position)
+    place_computer_3_ship if cell_position.ship == true
   end
 end
 #

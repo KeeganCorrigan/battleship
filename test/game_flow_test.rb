@@ -18,7 +18,6 @@ class GameFlowTest < Minitest::Test
   end
 
   def test_place_computer_2_ship
-    skip
     new_game = GameFlow.new
     new_game.place_computer_2_ship
     any_cell_has_ship =
@@ -30,15 +29,27 @@ class GameFlowTest < Minitest::Test
     assert_equal true, any_cell_has_ship
   end
 
-  def test_place_computer_3_ship
+  def test_place_computer_2_ship_places_2_ship_objects
     new_game = GameFlow.new
-    new_game.place_computer_3_ship
-    any_cell_has_ship =
-    new_game.computer_board.any? do |row|
-      row.any? do |cell|
+    new_game.place_computer_2_ship
+    two_cells_have_ships =
+    new_game.computer_board.map do |row|
+      row.count do |cell|
         cell.ship
       end
     end
-    assert_equal true, any_cell_has_ship
+    assert_equal 2, two_cells_have_ships.sum
+  end
+
+  def test_place_computer_3_ship_places_3_ship_objects
+    new_game = GameFlow.new
+    new_game.place_computer_3_ship
+    three_cells_have_ships =
+    new_game.computer_board.map do |row|
+      row.count do |cell|
+        cell.ship
+      end
+    end
+    assert_equal 3, three_cells_have_ships.sum
   end
 end
