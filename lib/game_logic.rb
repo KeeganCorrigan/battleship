@@ -65,13 +65,4 @@ class GameLogic
     end
     return third_coordinates.flatten
   end
-
-    #   elsif position == 0 && second_coordinates[index] != 0
-    #     (second_coordinates[index] - (ship_size + 1).abs
-    #   elsif position == 0
-    #
-    #   else
-    #     (position - second_coordinates[index]).abs
-    #   end
-    # end
 end

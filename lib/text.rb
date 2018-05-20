@@ -28,11 +28,8 @@ class Text
   end
 
   def begin_play_text
-    "I have laid out my ships on the grid."
-    "You now need to layout your two ships."
-    "The first is two units long and the"
-    "second is three units long."
-    "The grid has A1 at the top left and D4 at the bottom right."
+    "I have laid out my ships on the grid. You now need to layout your two ships. The first is two units long and the second is three units long.
+    The grid has A1 at the top left and D4 at the bottom right. Enter your choices like: A1 A2"
   end
 
   def invalid_starting_choice_text
@@ -47,20 +44,25 @@ class Text
     "Enter the squares for your three-unit ship:"
   end
 
-  def invalid_ship_placement_text
-    "You have chosen poorly. Try again"
+  def invalid_input
+    "Try again in the right format: A1 A2"
   end
 
-  def ship_wraps_around_board_text
-    "The ship can not wrap around the board"
+
+  def ship_diagonal_placement_text
+    "Ships couldn't possibly go diagonal. Try again"
   end
 
-  def ship_is_incorrect_number_of_squares
-    "Your ship is the wrong number of squares"
+  def ship_length_incorrect_or_wrap_attempt
+    "Your ship is the wrong number of cells or you're trying to wrap it around the board. Cut it out"
+  end
+
+  def ships_can_not_overlap
+    "No submarines. Ships can't overlap!"
   end
 
   def player_firing_turn
-    "It's your turn to fire, pick a square:"
+    "It's your turn to fire, pick a cell:"
   end
 
   def player_invalid_fire_Square_selection_text
