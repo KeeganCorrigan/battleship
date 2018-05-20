@@ -113,5 +113,31 @@ class GameFlowTest < Minitest::Test
     player_cells = [[0,0], [0,2]]
     assert_equal true,
     game.validate_player_ship_length(player_cells, player_ship)
+    player_ship = Ship.new(3)
+    player_cells = [[3,3], [3,1]]
+    assert_equal true,
+    game.validate_player_ship_length(player_cells, player_ship)
+    player_ship = Ship.new(2)
+    player_cells = [[2,2], [2,1]]
+    assert_equal true, game.validate_player_ship_length(player_cells, player_ship)
+    player_cells = [[2,3], [2,0]]
+    assert_equal false, game.validate_player_ship_length(player_cells, player_ship)
   end
+
+  def test_place_player_2_ship
+    game = GameFlow.new
+    player_ship = Ship.new(2)
+    player_cells = [[2,2], [2,1]]
+    game.place_player_2_ship(player_cells, player_ship)
+    two_cells_have_ships =
+    game.player_board.map do |row|
+      row.count do |cell|
+        cell.ship
+      end
+    end
+    assert_equal 2, two_cells_have_ships.sum
+  end
+
+  def test_place_player_3_ship
+    
 end

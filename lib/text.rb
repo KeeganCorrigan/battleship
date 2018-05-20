@@ -48,20 +48,16 @@ class Text
     "Enter the squares for your three-unit ship:"
   end
 
-  def invalid_ship_placement_text
-    "You have chosen poorly. Try again"
+  def ship_diagonal_placement_text
+    "Ships couldn't possibly go diagonal. Try again"
   end
 
-  def ship_wraps_around_board_text
-    "The ship can not wrap around the board"
-  end
-
-  def ship_is_incorrect_number_of_squares
-    "Your ship is the wrong number of squares"
+  def ship_length_incorrect_or_wrap_attempt
+    "Your ship is the wrong number of cells or you're trying to wrap it around the board. Cut it out"
   end
 
   def player_firing_turn
-    "It's your turn to fire, pick a square:"
+    "It's your turn to fire, pick a cell:"
   end
 
   def player_invalid_fire_Square_selection_text
