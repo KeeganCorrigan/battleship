@@ -134,7 +134,6 @@ class GameFlowTest < Minitest::Test
       row.count do |cell|
         cell.ship
       end
-    binding.pry
     end
     assert_equal 2, two_cells_have_ships.sum
   end
@@ -142,7 +141,23 @@ class GameFlowTest < Minitest::Test
   def test_get_cell_from_player_choice
     game = GameFlow.new
     player_cells = [[2,2], [2,1]]
-
+    assert_equal "C3", game.get_cell_position(player_cells[0]).position
   end
 
+  def test_place_player_3_ship
+    game = GameFlow.new
+    player_cells = [[2,2], [2,0]]
+    middle = [2,1]
+    player_ship = Ship.new(3)
+    cell_1 = game.get_cell_position(player_cells[0])
+    cell_2 = game.get_cell_position(player_cells[1])
+    cell_3 = game.get_cell_position(middle)
+    game.place_player_3_ship(cell_1, cell_2, cell_3, player_ship)
+    three_cells_have_ships = game.player_board.map do |row|
+      row.count do |cell|
+        cell.ship
+      end
+    end
+    assert_equal 3, three_cells_have_ships.sum
+  end
 end

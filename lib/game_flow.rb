@@ -116,16 +116,18 @@ def quit_play_or_read
     end
   end
 
-  # def place_player_3_ship(player_cells, middle_)
-  #   @player_board[player_cells[0][0]][player_cells[1][0]]
-  #   @player_board[player_cells[0][1]][player_cells[1][1]]
-  #   @player_board[]
-  # end
-
+  def get_cell_position(player_cell)
+    @player_board[player_cell[0]][player_cell[1]]
+  end
 
   def place_player_2_ship(player_cells, ship)
     @player_board[player_cells[0][0]][player_cells[0][1]].ship = ship
     @player_board[player_cells[1][0]][player_cells[1][1]].ship = ship
-    binding.pry
+  end
+
+  def place_player_3_ship(cell_1, cell_2, cell_3, ship)
+    cell_1.ship = ship
+    cell_2.ship = ship
+    cell_3.ship = ship
   end
 end
