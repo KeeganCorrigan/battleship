@@ -54,6 +54,12 @@ def get_starting_input
     @computer_board[@game_logic.first_coordinates[0]][@game_logic.first_coordinates[1]].ship = comp_ship_2
     @computer_board[@game_logic.first_coordinates[0]][@game_logic.first_coordinates[1]].ship = comp_ship_2
   end
+
+  def place_computer_3_ship
+    @game_logic.create_2_ship_coordinates(comp_ship_3)
+    @computer_board[@game_logic.first_coordinates[0]][@game_logic.first_coordinates[1]].ship = comp_ship_3
+    @computer_board[@game_logic.first_coordinates[0]][@game_logic.first_coordinates[1]].ship = comp_ship_3
+  end
 end
 #
 # game = GameFlow.new

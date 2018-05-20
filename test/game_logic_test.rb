@@ -91,8 +91,23 @@ class GameLogicTest < Minitest::Test
   end
 
   def test_generates_first_and_second_coordinates_for_3_ship
-    skip
     game = GameLogic.new
-    ship_2 = Ship.new(3)
+    ship_3 = Ship.new(3)
+    game.create_2_ship_coordinates(ship_3)
+    assert_equal Array, game.first_coordinates.class
+    assert_equal Array, game.second_coordinates.class
+    assert_equal 2, game.first_coordinates.length
+    assert_equal true, game.first_coordinates && [0, 1, 2, 3].any?
+    assert_equal true, game.second_coordinates && [0, 1, 2, 3].any?
+  end
+
+  def test_generate_ship_3_middle_coordinate
+    game = GameLogic.new
+    ship_3 = Ship.new(3)
+    assert_equal [1, 1], game.generate_ship_3_middle_coordinate([1, 0], [1, 2], ship_3)
+    assert_equal [2, 2], game.generate_ship_3_middle_coordinate([2, 1], [2, 3], ship_3)
+    assert_equal [2, 1], game.generate_ship_3_middle_coordinate([2, 0], [2, 2], ship_3)
+    assert_equal [0, 2], game.generate_ship_3_middle_coordinate([0, 1], [0, 3], ship_3)
+    assert_equal [3, 2], game.generate_ship_3_middle_coordinate([3, 3], [3, 1], ship_3)
   end
 end

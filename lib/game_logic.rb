@@ -6,7 +6,7 @@ require './lib/game_flow'
 require 'pry'
 
 class GameLogic
-  attr_reader :text, :first_coordinates, :second_coordinates
+  attr_reader :text, :first_coordinates, :second_coordinates, :third_coordinates
 
   def initialize
     @text = Text.new
@@ -51,5 +51,19 @@ class GameLogic
   def create_3_ship_coordinates(ship_3)
     @first_coordinates = first_coordinate_picker
     @second_coordinates = [horizontal_ship(ship_3.length, first_coordinates), vertical_ship(ship_3.length, first_coordinates)].sample
+    @third_coordinates
+  end
+
+
+  def generate_ship_3_middle_coordinate(first_coordinates, second_coordinates, ship_3)
+    third_coordinates = first_coordinates.map.with_index do |position, index|
+      if position - second_coordinates[index] == 0
+        position
+      elsif position == 0
+        (second_coordinates[index] - ship_3.length).abs
+      else
+        (position - second_coordinates[index]).abs
+      end
+    end
   end
 end
