@@ -140,4 +140,23 @@ def quit_play_or_read
           D #{board[3][0].state} #{board[3][1].state} #{board[3][2].state} #{board[3][3].state}         \n
           ===========\n"
   end
+
+  def fire_at_ships_valid_input(input, board)
+    valid_inputs = board.flatten.map do |cell|
+      cell.position
+    end
+    binding.pry
+    valid_inputs.include?(input)
+  end
+
+  def get_valid_cell_positions_array(board)
+    valid_inputs = board.flatten.map do |cell|
+      cell.position
+    end
+    return valid_inputs
+  end
+
+  def fire_at_ships(input, board)
+
+  end
 end

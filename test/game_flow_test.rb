@@ -160,4 +160,22 @@ class GameFlowTest < Minitest::Test
     end
     assert_equal 3, three_cells_have_ships.sum
   end
+
+  def test_get_valid_cell_positions_array
+    game = GameFlow.new
+    
+
+  def test_fire_at_ships_input_is_valid
+    game = GameFlow.new
+    input = "A1"
+    assert_equal true, game.fire_at_ships_valid_input(input, game.computer_board)
+  end
+
+  def test_fire_at_ships
+    skip
+    game = GameFlow.new
+    input = "A1"
+    game.fire_at_ships(input, game.computer_board)
+    assert_equal "M", game.computer_board[0][0]
+  end
 end

@@ -72,6 +72,7 @@ game.place_player_3_ship(cell_1, cell_2, cell_3, game.player_ship_3)
 
 until game.comp_ship_2.length == 0 && game.comp_ship_3.length == 0 || game.player_ship_2.length == 0 && game.player_ship_3.length == 0
   p game.text.player_firing_turn
-  input = game.
+  input = game.get_player_input
+  
   game.display_board(game.computer_board)
   p game.text.player_firing_turn
