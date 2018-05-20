@@ -19,15 +19,15 @@ class GameFlow
     @game_logic = GameLogic.new
   end
 
-def get_starting_input
-  input = gets.chomp
+def quit_play_or_read
+    input = get_player_input
     if input == 'p' || input == 'play'
       return
     elsif input == 'q'|| input == 'quit'
       quit_the_game
     elsif input == 'i' || input == 'instructions'
       p text.instruction_text
-      game_introduction
+      quit_play_or_read
     else
       p text.invalid_starting_choice_text
       game_introduction
@@ -44,10 +44,12 @@ def get_starting_input
   end
 
   def start
-    p text.play_quit_or_instructions_text
-    get_starting_input
+    text.play_quit_or_instructions_text
   end
 
+  def get_player_input
+    gets.chomp
+  end
   def place_computer_2_ship
     @game_logic.create_ship_coordinates(comp_ship_2)
 
@@ -75,8 +77,17 @@ def get_starting_input
     if cell1.ship || cell2.ship || cell3.ship != nil
       return false
     end
+    return true
+  end
+
+  def get_player_2_ship_placement_choice(input)
+    if input.split(" ").length != 2
+      p text.invalid_input
+      input = get_player_input
+      get_player_2_ship_placement_choice(input)
     else
-      return true
+      return input.upcase.split(" ")
+    end
   end
 end
 #

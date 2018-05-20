@@ -28,11 +28,8 @@ class Text
   end
 
   def begin_play_text
-    "I have laid out my ships on the grid."
-    "You now need to layout your two ships."
-    "The first is two units long and the"
-    "second is three units long."
-    "The grid has A1 at the top left and D4 at the bottom right."
+    "I have laid out my ships on the grid. You now need to layout your two ships. The first is two units long and the second is three units long.
+    The grid has A1 at the top left and D4 at the bottom right. Enter your choices like: A1 A2"
   end
 
   def invalid_starting_choice_text
@@ -41,6 +38,10 @@ class Text
 
   def player_places_two_unit_ship_text
     "Enter the squares for the two-unit ship:"
+  end
+
+  def invalid_input
+    "Try again in the right format: A1 A2"
   end
 
   def player_places_three_unit_ship_text

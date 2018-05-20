@@ -80,4 +80,10 @@ class GameFlowTest < Minitest::Test
     game.place_computer_3_ship
     assert_equal 5, five_cells_with_ship.sum
   end
+
+  def test_get_player_2_ship_placement_choice
+    game = GameFlow.new
+    input = "A1 A3"
+    assert_equal 2, game.get_player_2_ship_placement_choice(input).length
+  end
 end
