@@ -81,11 +81,11 @@ class GameFlowTest < Minitest::Test
     assert_equal 5, five_cells_with_ship.sum
   end
 
-  def test_get_player_2_ship_placement_choice
+  def test_get_player_ship_placement_choice
     game = GameFlow.new
     input = "A1 A3"
-    assert_equal 2, game.get_player_2_ship_placement_choice(input).length
-    assert_equal Array, game.get_player_2_ship_placement_choice(input).class
+    assert_equal 2, game.get_player_ship_placement_choice(input).length
+    assert_equal Array, game.get_player_ship_placement_choice(input).class
   end
 
   def test_change_player_ship_placement_to_positions
@@ -134,10 +134,15 @@ class GameFlowTest < Minitest::Test
       row.count do |cell|
         cell.ship
       end
+    binding.pry
     end
     assert_equal 2, two_cells_have_ships.sum
   end
 
-  def test_place_player_3_ship
-    
+  def test_get_cell_from_player_choice
+    game = GameFlow.new
+    player_cells = [[2,2], [2,1]]
+
+  end
+
 end

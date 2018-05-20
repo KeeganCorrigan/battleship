@@ -40,13 +40,14 @@ class Text
     "Enter the squares for the two-unit ship:"
   end
 
+  def player_places_three_unit_ship_text
+    "Enter the squares for your three-unit ship:"
+  end
+
   def invalid_input
     "Try again in the right format: A1 A2"
   end
 
-  def player_places_three_unit_ship_text
-    "Enter the squares for your three-unit ship:"
-  end
 
   def ship_diagonal_placement_text
     "Ships couldn't possibly go diagonal. Try again"
@@ -54,6 +55,10 @@ class Text
 
   def ship_length_incorrect_or_wrap_attempt
     "Your ship is the wrong number of cells or you're trying to wrap it around the board. Cut it out"
+  end
+
+  def ships_can_not_overlap
+    "No submarines. Ships can't overlap!"
   end
 
   def player_firing_turn

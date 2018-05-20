@@ -6,7 +6,7 @@ require './lib/cell'
 
 class GameFlow
 
-  attr_reader :text, :comp_ship_2, :comp_ship_3, :computer_board, :player_ship_2, :player_ship_3, :player_board
+  attr_reader :text, :comp_ship_2, :comp_ship_3, :computer_board, :player_ship_2, :player_ship_3, :player_board, :game_logic
 
   def initialize
     @text = Text.new
@@ -78,11 +78,11 @@ def quit_play_or_read
     return true
   end
 
-  def get_player_2_ship_placement_choice(input)
+  def get_player_ship_placement_choice(input)
     if input.split(" ").length != 2
       p text.invalid_input
       input = get_player_input
-      get_player_2_ship_placement_choice(input)
+      get_player_ship_placement_choice(input)
     else
       return input.upcase.split(" ")
     end
@@ -116,22 +116,16 @@ def quit_play_or_read
     end
   end
 
-  def place_player_2_ship(player_cells, ship)
-    @player_board[player_cells[0][0]][player_cells[1][0]].ship = ship
-    @player_board[player_cells[0][1]][player_cells[1][1]].ship = ship
-  end
-
-  # def place_player_3_ship(player_cells, ship)
-  #   no_overlapping_ships = false
-  #   until no_overlapping_ships == true
-  #     first_ship_cell = @player_board[player_cells[0][0]][player_cells[1][0]]
-  #     second_ship_cell = @player_board[player_cells[0][1]][player_cells[1][1]]
-  #     third_ship_cell = @player_board[@game_logic.generate_ship_3_middle_coordinate(player_cells[0], player_cells[1])
-  #     no_overlapping_ships = verify_no_ship_in_cell(first_ship_cell, second_ship_cell, third_ship_cell)
-  #   end
-  #   first_ship_cell.ship = player_ship_3
-  #   second_ship_cell.ship = player_ship_3
-  #   third_ship_cell.ship = player_ship_3
+  # def place_player_3_ship(player_cells, middle_)
+  #   @player_board[player_cells[0][0]][player_cells[1][0]]
+  #   @player_board[player_cells[0][1]][player_cells[1][1]]
+  #   @player_board[]
   # end
 
+
+  def place_player_2_ship(player_cells, ship)
+    @player_board[player_cells[0][0]][player_cells[0][1]].ship = ship
+    @player_board[player_cells[1][0]][player_cells[1][1]].ship = ship
+    binding.pry
+  end
 end
