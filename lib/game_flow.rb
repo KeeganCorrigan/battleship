@@ -161,4 +161,8 @@ def quit_play_or_read
     end
     return cell
   end
+
+  def win_state
+    false
+  end
 end

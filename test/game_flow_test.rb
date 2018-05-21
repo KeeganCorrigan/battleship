@@ -192,5 +192,4 @@ class GameFlowTest < Minitest::Test
     binding.pry
     assert_equal "H", game.player_board[2][1].state
   end
-
 end

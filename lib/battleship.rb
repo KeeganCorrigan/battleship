@@ -69,23 +69,28 @@ until valid_input == true
 end
 
 game.place_player_3_ship(cell_1, cell_2, cell_3, game.player_ship_3)
-
-until game.valid_inputs.include?(input) == true && cell.state != "~"
-  p game.text.player_firing_turn
-  input = game.get_player_input
-  game.display_board(game.computer_board)
-  valid_inputs = game.get_valid_cell_positions_array
-  if game.valid_inputs.include?(input) != true
-    p game.text.player_invalid_fire_Square_selection_text
-  cell = game.get_cell_state(input, computer_board)
-  if cell.state == "~"
-    p 
+until game.win_state == true
+  valid_choice = false
+  until valid_choice == true
+    p game.text.player_firing_turn
+    input = game.get_player_input
+    valid_inputs = game.get_valid_cell_positions_array(game.computer_board)
+    if valid_inputs.include?(input) != true
+      p game.text.player_invalid_fire_Square_selection_text
+    end
+    cell = game.get_cell_state(input, game.computer_board)
+    if cell.state != "~"
+      p game.text.player_already_fired_on_same_sqaure_text
+    end
+    if cell.state == "~"
+      valid_choice = true
+    end
+  end
   game.fire_at_ships(input, game.computer_board)
-  if cell.state == "H"
-    p game.text.confirm_player_hit_text
-  elsif cell.state == "M"
-    p game.text.confirm_player_miss_text
-
-
-
-p game.text.player_firing_turn
+    if cell.state == "H"
+      p game.text.confirm_player_hit_text
+    elsif cell.state == "M"
+      p game.text.confirm_player_miss_text
+    end
+  game.display_board(game.computer_board)
+end
