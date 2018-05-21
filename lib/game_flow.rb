@@ -141,13 +141,6 @@ def quit_play_or_read
           ===========\n"
   end
 
-  def fire_at_ships_valid_input(input, board)
-    valid_inputs = board.flatten.map do |cell|
-      cell.position
-    end
-    valid_inputs.include?(input)
-  end
-
   def get_valid_cell_positions_array(board)
     valid_inputs = board.flatten.map do |cell|
       cell.position
@@ -156,13 +149,16 @@ def quit_play_or_read
   end
 
   def fire_at_ships(input, board)
-    
+    cell = get_cell_state(input, board)
+    if cell.state == "~"
+      cell.change_state
+    end
   end
 
   def get_cell_state(input, board)
-    status = board.flatten.find do |cell|
+    cell = board.flatten.find do |cell|
       cell.position == input
     end
-    return status.state
+    return cell
   end
 end

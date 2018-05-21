@@ -168,25 +168,29 @@ class GameFlowTest < Minitest::Test
     assert_equal "D4", actual[15]
   end
 
-  def test_fire_at_ships_input_is_valid
-    game = GameFlow.new
-    input = "A1"
-    assert_equal true, game.fire_at_ships_valid_input(input, game.computer_board)
-    input = "D5"
-    assert_equal false, game.fire_at_ships_valid_input(input, game.computer_board)
-  end
-
   def test_get_cell_state
     game = GameFlow.new
     input = "A1"
-    assert_equal "~", game.get_cell_state(input, game.computer_board)
+    actual = game.get_cell_state(input, game.computer_board)
+    assert_equal "~", actual.state
   end
 
-  def test_fire_at_ships
-    skip
+  def test_fire_at_ships_misses
     game = GameFlow.new
     input = "A1"
     game.fire_at_ships(input, game.computer_board)
-    assert_equal "M", game.computer_board[0][0]
+    assert_equal "M", game.computer_board[0][0].state
   end
+
+  def test_fire_at_ships_hits
+    game = GameFlow.new
+    input = "C2"
+    player_ship = Ship.new(2)
+    player_cells = [[2,2], [2,1]]
+    game.place_player_2_ship(player_cells, player_ship)
+    game.fire_at_ships(input, game.player_board)
+    binding.pry
+    assert_equal "H", game.player_board[2][1].state
+  end
+
 end
