@@ -77,6 +77,11 @@ class Text
     "That's a hit. You killed #{rand(2..100)} sailors."
   end
 
+  def confirm_computer_firing_location(cell)
+    "The machines fired at #{cell}."
+  end
+
+
   def confirm_player_miss_text
     "It's a miss. You failed to kill someone's family member."
   end

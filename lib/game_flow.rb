@@ -162,6 +162,10 @@ def quit_play_or_read
     return cell
   end
 
+  def computer_fire_at_ships(board)
+    get_valid_cell_positions_array(board).sample
+  end
+
   def win_state
     false
   end

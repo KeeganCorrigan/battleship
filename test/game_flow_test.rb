@@ -189,7 +189,14 @@ class GameFlowTest < Minitest::Test
     player_cells = [[2,2], [2,1]]
     game.place_player_2_ship(player_cells, player_ship)
     game.fire_at_ships(input, game.player_board)
-    binding.pry
     assert_equal "H", game.player_board[2][1].state
+  end
+
+  def test_computer_fire_at_ships
+    skip
+    #how am I gonna test this thing?
+    game = GameFlow.new
+    expected = game.get_valid_cell_positions_array(game.player_board)
+    assert_equal "A1", game.computer_fire_at_ships(game.player_board)
   end
 end
