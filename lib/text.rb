@@ -77,14 +77,22 @@ class Text
     "That's a hit. You killed #{rand(2..100)} sailors."
   end
 
+  def confirm_player_miss_text
+    "It's a miss. You failed to kill someone's family member."
+  end
+
+  def confirm_your_ship_was_sunk(ship_name)
+    "Your #{ship_name} was sunk."
+  end
+
+  def confirm_computer_ship_was_sunk(ship_name, size)
+    "You sunk the #{ship_name}. It took up #{size} squares."
+  end
+
   def confirm_computer_firing_location(cell)
     "The machines fired at #{cell}."
   end
 
-
-  def confirm_player_miss_text
-    "It's a miss. You failed to kill someone's family member."
-  end
 
   def confirm_computer_hit_text
     "The computer hit you. The sentient machines killed #{rand(2..100)} sailors."
@@ -106,8 +114,7 @@ class Text
     "Would you like to play again?"
   end
 
-  def number_of_guesses_and_time_text
-    #add interpolation for guesses and time
-    "You took this many guesses and it took this long"
+  def number_of_guesses_and_time_text(time, shots_fired)
+    "You fired #{shots_fired} and it took #{time / 60} minutes and #{time / 60 % 60} seconds"
   end
 end

@@ -192,6 +192,45 @@ class GameFlowTest < Minitest::Test
     assert_equal "H", game.player_board[2][1].state
   end
 
+  def test_count_hits_on_ships
+    game = GameFlow.new
+    input = "C2"
+    player_ship = Ship.new(2)
+    player_cells = [[2,2], [2,1]]
+    game.place_player_2_ship(player_cells, player_ship)
+    game.fire_at_ships(input, game.player_board)
+    assert_equal 1, game.count_hits_on_ships(game.player_board)
+    input = "C3"
+    game.fire_at_ships(input, game.player_board)
+    assert_equal 2, game.count_hits_on_ships(game.player_board)
+  end
+
+  def test_win_state
+    game = GameFlow.new
+    player_ship = Ship.new(2)
+    player_cells = [[2,2], [2,1]]
+    game.place_player_2_ship(player_cells, player_ship)
+    game.fire_at_ships(input, game.player_board)
+    player_cells = [[3,2], [3,0]]
+    middle = [3,1]
+    player_ship = Ship.new(3)
+    cell_1 = game.get_cell_position(player_cells[0])
+    cell_2 = game.get_cell_position(player_cells[1])
+    cell_3 = game.get_cell_position(middle)
+    game.place_player_3_ship(cell_1, cell_2, cell_3, player_ship)
+    input = "D3"
+    game.fire_at_ships(input, game.player_board)
+    input = "D2"
+    game.fire_at_ships(input, game.player_board)
+    input = "D1"
+    game.fire_at_ships(input, game.player_board)
+    input = "C2"
+    game.fire_at_ships(input, game.player_board)
+    input = "C3"
+    game.fire_at_ships(input, game.player_board)
+    assert_equal 2, game.count_hits_on_ships(game.player_board)
+  end
+
   def test_computer_fire_at_ships
     skip
     #how am I gonna test this thing?

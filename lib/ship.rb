@@ -2,10 +2,15 @@ require 'pry'
 require './lib/cell.rb'
 
 class Ship
-  attr_reader :length
+  attr_reader :length, :name, :size
 
-  def initialize(length)
+  attr_accessor :sunk
+
+  def initialize(length, name = "", size = "")
     @length = length
+    @name = name
+    @size = size
+    @sink_counter = 0
   end
 
   def take_hit
@@ -13,7 +18,8 @@ class Ship
   end
 
   def sunk
-    if @length == 0
+    if @sink_counter = 0 && @length == 0
+      @sinker_counter += 1
       true
     else
       false

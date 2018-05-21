@@ -10,11 +10,11 @@ class GameFlow
 
   def initialize
     @text = Text.new
-    @comp_ship_2 = Ship.new(2)
-    @comp_ship_3 = Ship.new(3)
+    @comp_ship_2 = Ship.new(2, "Peaceful fishing boat", "2")
+    @comp_ship_3 = Ship.new(3, "Merchant vessel just doing its job", "3")
     @computer_board = GameBoard.new.create_board
-    @player_ship_2 = Ship.new(2)
-    @player_ship_3 = Ship.new(3)
+    @player_ship_2 = Ship.new(2, "Patrol Boat", "2")
+    @player_ship_3 = Ship.new(3, "Destroyer", "3")
     @player_board = GameBoard.new.create_board
     @game_logic = GameLogic.new
   end
@@ -166,7 +166,18 @@ def quit_play_or_read
     get_valid_cell_positions_array(board).sample
   end
 
-  def win_state
-    false
+  def count_hits_on_ships(board)
+    ship_hits = board.flatten.count do |cell|
+      cell.state == "H"
+    end
+    return ship_hits
+  end
+
+  def win_state(board)
+    if count_hits_on_ships(board) == 5
+      return true
+    else
+      return false
+    end
   end
 end
