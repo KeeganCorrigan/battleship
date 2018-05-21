@@ -3,7 +3,7 @@ require './lib/cell.rb'
 
 class Ship
   attr_reader :length
-  
+
   def initialize(length)
     @length = length
   end

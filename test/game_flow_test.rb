@@ -160,4 +160,43 @@ class GameFlowTest < Minitest::Test
     end
     assert_equal 3, three_cells_have_ships.sum
   end
+
+  def test_get_valid_cell_positions_array
+    game = GameFlow.new
+    actual = game.get_valid_cell_positions_array(game.player_board)
+    assert_equal "A1", actual[0]
+    assert_equal "D4", actual[15]
+  end
+
+  def test_get_cell_state
+    game = GameFlow.new
+    input = "A1"
+    actual = game.get_cell_state(input, game.computer_board)
+    assert_equal "~", actual.state
+  end
+
+  def test_fire_at_ships_misses
+    game = GameFlow.new
+    input = "A1"
+    game.fire_at_ships(input, game.computer_board)
+    assert_equal "M", game.computer_board[0][0].state
+  end
+
+  def test_fire_at_ships_hits
+    game = GameFlow.new
+    input = "C2"
+    player_ship = Ship.new(2)
+    player_cells = [[2,2], [2,1]]
+    game.place_player_2_ship(player_cells, player_ship)
+    game.fire_at_ships(input, game.player_board)
+    assert_equal "H", game.player_board[2][1].state
+  end
+
+  def test_computer_fire_at_ships
+    skip
+    #how am I gonna test this thing?
+    game = GameFlow.new
+    expected = game.get_valid_cell_positions_array(game.player_board)
+    assert_equal "A1", game.computer_fire_at_ships(game.player_board)
+  end
 end

@@ -16,14 +16,4 @@ class GameBoard
     end
     @board_array = @board_array.each_slice(4).to_a
   end
-
-  def display_board
-    puts "          ===========\n
-          . 1 2 3 4  \n
-          A #{@board_array[0][0].state} #{@board_array[0][1].state} #{@board_array[0][2].state} #{@board_array[0][3].state}         \n
-          B #{@board_array[1][0].state} #{@board_array[1][1].state} #{@board_array[1][2].state} #{@board_array[1][3].state}         \n
-          C #{@board_array[2][0].state} #{@board_array[2][1].state} #{@board_array[2][2].state} #{@board_array[2][3].state}           \n
-          D #{@board_array[3][0].state} #{@board_array[3][1].state} #{@board_array[3][2].state} #{@board_array[3][3].state}         \n
-          ===========\n"
-  end
 end

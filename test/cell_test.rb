@@ -1,5 +1,6 @@
 require './test/test_helper'
 require './lib/cell.rb'
+require './lib/ship.rb'
 require 'pry'
 
 class CellTest < Minitest::Test
@@ -14,29 +15,27 @@ class CellTest < Minitest::Test
   end
 
   def test_it_can_be_hit
-    skip
     cell = Cell.new("A1")
-    # something happens here to have it change to H
-    assert_equal "H", cell.display
+    ship = Ship.new(2)
+    cell.ship = ship
+    binding.pry
+    assert_equal "H", cell.change_state
   end
 
   def test_it_can_be_missed
-    skip
     cell = Cell.new("A1")
-    # something happens here to change it to M
-    assert_equal "M", cell.display
+    assert_equal "M", cell.change_state
   end
 
   def test_it_can_have_a_ship
-    skip
     cell = Cell.new("A1")
-    # something happens here that means it has a ship!
-    assert_equal true, cell.ship?
+    ship = Ship.new(2)
+    cell.ship = ship
+    assert_equal 2, cell.ship.length
   end
 
   def test_it_starts_with_default_state
     cell = Cell.new("A1")
-    binding.pry
-    assert_equal '^', cell.state
+    assert_equal '~', cell.state
   end
 end
