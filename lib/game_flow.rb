@@ -36,7 +36,6 @@ def quit_play_or_read
 
   def game_introduction
      p text.play_quit_or_instructions_text
-     get_starting_input
   end
 
   def quit_the_game
@@ -48,7 +47,7 @@ def quit_play_or_read
   end
 
   def get_player_input
-    gets.chomp
+    gets.upcase.chomp
   end
 
   def place_computer_2_ship

@@ -5,17 +5,17 @@ game = GameFlow.new
 
 #game start and comuter placement
 
-p game.start
+puts game.start
 game.quit_play_or_read
 game.place_computer_2_ship
 game.place_computer_3_ship
 valid_input = false
-p game.text.begin_play_text
+puts game.text.begin_play_text
 
 # player 2 ship placement
 
 until valid_input == true
-  p game.text.player_places_two_unit_ship_text
+  puts game.text.player_places_two_unit_ship_text
   input = game.get_player_input
   player_cell_choice = game.get_player_ship_placement_choice(input)
   player_cells = game.change_player_ship_placement_to_positions(player_cell_choice)
@@ -23,11 +23,11 @@ until valid_input == true
   valid_size = game.validate_player_ship_length(player_cells, game.player_ship_2)
 
   if valid_range == false
-    p game.text.ship_diagonal_placement_text
+    puts game.text.ship_diagonal_placement_text
   end
 
   if valid_size == false
-    p game.text.ship_length_incorrect_or_wrap_attempt
+    puts game.text.ship_length_incorrect_or_wrap_attempt
   end
 
   if valid_range && valid_size == true
@@ -42,7 +42,7 @@ valid_input = false
 
 until valid_input == true
 
-  p game.text.player_places_three_unit_ship_text
+  puts game.text.player_places_three_unit_ship_text
   input = game.get_player_input
   player_cell_choice = game.get_player_ship_placement_choice(input)
   player_cells = game.change_player_ship_placement_to_positions(player_cell_choice)
@@ -50,11 +50,11 @@ until valid_input == true
   valid_size = game.validate_player_ship_length(player_cells, game.player_ship_3)
 
   if valid_range == false
-    p game.text.ship_diagonal_placement_text
+    puts game.text.ship_diagonal_placement_text
   end
 
   if valid_size == false
-    p game.text.ship_length_incorrect_or_wrap_attempt
+    puts game.text.ship_length_incorrect_or_wrap_attempt
   end
 
 # player ship 3 placement initial verification and middle coordinate generation
@@ -91,15 +91,15 @@ win_state_checker = false
 until win_state_checker == true
   valid_choice = false
   until valid_choice == true
-    p game.text.player_firing_turn
+    puts game.text.player_firing_turn
     input = game.get_player_input
     valid_inputs = game.get_valid_cell_positions_array(game.computer_board)
     if valid_inputs.include?(input) != true
-      p game.text.player_invalid_fire_Square_selection_text
+      puts game.text.player_invalid_fire_Square_selection_text
     end
     cell = game.get_cell_state(input, game.computer_board)
     if cell.state != "~"
-      p game.text.player_already_fired_on_same_sqaure_text
+      puts game.text.player_already_fired_on_same_sqaure_text
     end
     if cell.state == "~"
       valid_choice = true
@@ -110,10 +110,10 @@ until win_state_checker == true
 
   game.fire_at_ships(input, game.computer_board)
     if cell.state == "H"
-      p game.text.confirm_player_hit_text
+      puts game.text.confirm_player_hit_text
       cell.ship.take_hit
     elsif cell.state == "M"
-      p game.text.confirm_player_miss_text
+      puts game.text.confirm_player_miss_text
     end
   game.display_board(game.computer_board)
   valid_choice = false
@@ -121,12 +121,12 @@ until win_state_checker == true
 # Verify ship sink
 
   if game.comp_ship_2.sunk == true
-    p game.text.confirm_computer_ship_was_sunk(game.comp_ship_2.name, game.comp_ship_2.size)
+    puts game.text.confirm_computer_ship_was_sunk(game.comp_ship_2.name, game.comp_ship_2.size)
   end
   if game.comp_ship_3.sunk == true
-    p game.text.confirm_computer_ship_was_sunk(game.comp_ship_3.name, game.comp_ship_3.size)
+    puts game.text.confirm_computer_ship_was_sunk(game.comp_ship_3.name, game.comp_ship_3.size)
   end
-  if game.win_state(game.comp_ship_2, game.comp_ship_3) == true
+  if game.win_state(game.computer_board) == true
     win_state_checker = true
   end
 
@@ -143,17 +143,18 @@ until win_state_checker == true
 
 # computer_fires
 
-  p game.text.confirm_computer_firing_location(cell.position)
+  puts game.text.confirm_computer_firing_location(cell.position)
   game.fire_at_ships(input, game.player_board)
   if cell.state == "H"
-    p game.text.confirm_computer_hit_text
+    puts game.text.confirm_computer_hit_text
     cell.ship.take_hit
   elsif cell.state == "M"
-    p game.text.confirm_computer_miss_text
+    puts game.text.confirm_computer_miss_text
   end
-  if game.win_state(game.player_ship_2, game.player_ship_3) == true
+  if game.win_state(game.player_board) == true
     win_state_checker = true
   end
   game.display_board(game.player_board)
 end
-p "Somebody won!"
+
+puts "Somebody won!"

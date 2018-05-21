@@ -39,6 +39,7 @@ class ShipTest < Minitest::Test
     ship_1 = Ship.new(2)
     ship_1.take_hit
     ship_1.take_hit
+    ship_1.sunk
     assert_equal 1, ship_1.sink_counter
   end
 end
