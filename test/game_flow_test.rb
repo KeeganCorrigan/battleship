@@ -163,12 +163,23 @@ class GameFlowTest < Minitest::Test
 
   def test_get_valid_cell_positions_array
     game = GameFlow.new
-    
+    actual = game.get_valid_cell_positions_array(game.player_board)
+    assert_equal "A1", actual[0]
+    assert_equal "D4", actual[15]
+  end
 
   def test_fire_at_ships_input_is_valid
     game = GameFlow.new
     input = "A1"
     assert_equal true, game.fire_at_ships_valid_input(input, game.computer_board)
+    input = "D5"
+    assert_equal false, game.fire_at_ships_valid_input(input, game.computer_board)
+  end
+
+  def test_get_cell_state
+    game = GameFlow.new
+    input = "A1"
+    assert_equal "~", game.get_cell_state(input, game.computer_board)
   end
 
   def test_fire_at_ships

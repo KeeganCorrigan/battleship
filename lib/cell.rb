@@ -1,4 +1,4 @@
-# 4 arrays of 4 will compose the playing board. Each index will be occupied by this cell object.
+require './lib/ship'
 
 class Cell
   attr_reader :position
@@ -17,15 +17,19 @@ class Cell
     '~'
   end
 
-  def hit_state
-    if @ship == true
-      'H'
+  def change_state
+    if @ship != nil
+      hit_state
+    else
+      miss_state
     end
   end
 
+  def hit_state
+    @state = 'H'
+  end
+
   def miss_state
-    if @ship == false
-      'M'
-    end
+    @state = 'M'
   end
 end
