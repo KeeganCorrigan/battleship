@@ -75,8 +75,7 @@ class GameFlow
     return valid_inputs
   end
 
-  def fire_at_ships(input, board)
-    cell = get_cell_state(input, board)
+  def fire_at_ships(cell)
     if cell.state == "~"
       cell.change_state
     end

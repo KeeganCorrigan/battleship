@@ -1,5 +1,6 @@
 require './lib/game_flow'
 require './lib/ship_placement'
+require './lib/firing_sequence'
 
 game = GameFlow.new
 
@@ -11,37 +12,7 @@ player_ship_placement.place_ships
 win_state_checker = false
 until win_state_checker == true
 firing_sequence = FiringSequence.new(game)
-firing_sequence.player_fire
-
-
-  valid_choice = false
-  until valid_choice == true
-    puts game.text.player_firing_turn
-    input = game.get_player_input
-    valid_inputs = game.get_valid_cell_positions_array(game.computer_board)
-    if valid_inputs.include?(input) != true
-      puts game.text.player_invalid_fire_Square_selection_text
-    end
-    cell = game.get_cell_state(input, game.computer_board)
-    if cell.state != "~"
-      puts game.text.player_already_fired_on_same_sqaure_text
-    end
-    if cell.state == "~"
-      valid_choice = true
-    end
-  end
-
-# player fires
-
-  game.fire_at_ships(input, game.computer_board)
-    if cell.state == "H"
-      puts game.text.confirm_player_hit_text
-      cell.ship.take_hit
-    elsif cell.state == "M"
-      puts game.text.confirm_player_miss_text
-    end
-  game.display_board(game.computer_board)
-  valid_choice = false
+firing_sequence.fire_shots
 
 # Verify ship sink
 
@@ -56,7 +27,7 @@ firing_sequence.player_fire
   end
 
 #computer_choice_fire_loop
-
+  valid_choice = false
   until valid_choice == true
     input = game.computer_fire_at_ships(game.player_board)
     cell = game.get_cell_state(input, game.player_board)
