@@ -1,12 +1,15 @@
+require './test/test_helper'
+require './lib/ship'
 require './lib/ship'
 require './lib/game_board'
 require './lib/text'
 require './lib/game_logic'
 require './lib/cell'
+require './lib/player'
 
 class GameFlow
 
-  attr_reader :text, :comp_ship_2, :comp_ship_3, :computer_board, :player_ship_2, :player_ship_3, :player_board, :game_logic
+  attr_reader :text, :comp_ship_2, :comp_ship_3, :computer_board, :player_ship_2, :player_ship_3, :player_board, :game_logic, :player
 
   def initialize
     @text = Text.new
@@ -17,117 +20,15 @@ class GameFlow
     @player_ship_3 = Ship.new(3, "Destroyer", "3")
     @player_board = GameBoard.new.create_board
     @game_logic = GameLogic.new
-  end
-
-def quit_play_or_read
-    input = get_player_input
-    if input == 'p' || input == 'play'
-      return
-    elsif input == 'q'|| input == 'quit'
-      quit_the_game
-    elsif input == 'i' || input == 'instructions'
-      p text.instruction_text
-      quit_play_or_read
-    else
-      p text.invalid_starting_choice_text
-      game_introduction
-    end
-  end
-
-  def game_introduction
-     p text.play_quit_or_instructions_text
+    @player = Player.new
   end
 
   def quit_the_game
     exit
   end
 
-  def start
-    text.play_quit_or_instructions_text
-  end
-
   def get_player_input
     gets.upcase.chomp
-  end
-
-  def place_computer_2_ship
-    @game_logic.create_ship_coordinates(comp_ship_2)
-    @computer_board[@game_logic.first_coordinates[0]][@game_logic.first_coordinates[1]].ship = comp_ship_2
-    @computer_board[@game_logic.second_coordinates[0]][@game_logic.second_coordinates[1]].ship = comp_ship_2
-  end
-
-  def place_computer_3_ship
-    no_overlapping_ships = false
-    until no_overlapping_ships == true
-      @game_logic.create_ship_coordinates(comp_ship_3)
-      first_ship_cell =    @computer_board[@game_logic.first_coordinates[0]][@game_logic.first_coordinates[1]]
-      second_ship_cell = @computer_board[@game_logic.second_coordinates[0]][@game_logic.second_coordinates[1]]
-      third_ship_cell = @computer_board[@game_logic.third_coordinates[0]][@game_logic.third_coordinates[1]]
-      no_overlapping_ships = verify_no_ship_in_cell(first_ship_cell, second_ship_cell, third_ship_cell)
-    end
-    first_ship_cell.ship = comp_ship_3
-    second_ship_cell.ship = comp_ship_3
-    third_ship_cell.ship = comp_ship_3
-  end
-
-  def verify_no_ship_in_cell(cell1, cell2, cell3)
-    if cell1.ship || cell2.ship || cell3.ship != nil
-      return false
-    end
-    return true
-  end
-
-  def get_player_ship_placement_choice(input)
-    if input.split(" ").length != 2
-      p text.invalid_input
-      input = get_player_input
-      get_player_ship_placement_choice(input)
-    else
-      return input.upcase.split(" ")
-    end
-  end
-
-  def change_player_ship_placement_to_positions(player_cell_choice)
-    player_cell_array = []
-    @player_board.each_with_index do |row, index_1|
-      row.each_with_index do |cell, index_2|
-        player_cell_choice.each do |choice|
-          player_cell_array << [index_1, index_2] if cell.position == choice
-        end
-      end
-    end
-    return player_cell_array
-  end
-
-  def verify_player_horizontal_vertical_placement(player_cells)
-    if player_cells[0][0] == player_cells[1][0] || player_cells[0][1] == player_cells[1][1]
-      return true
-    else
-      return false
-    end
-  end
-
-  def validate_player_ship_length(player_cells, ship)
-    if (player_cells[0][0] - player_cells[1][0]).abs == (ship.length - 1) || (player_cells[0][1] - player_cells[1][1]).abs == (ship.length - 1)
-      return true
-    else
-      return false
-    end
-  end
-
-  def get_cell_position(player_cell)
-    @player_board[player_cell[0]][player_cell[1]]
-  end
-
-  def place_player_2_ship(player_cells, ship)
-    @player_board[player_cells[0][0]][player_cells[0][1]].ship = ship
-    @player_board[player_cells[1][0]][player_cells[1][1]].ship = ship
-  end
-
-  def place_player_3_ship(cell_1, cell_2, cell_3, ship)
-    cell_1.ship = ship
-    cell_2.ship = ship
-    cell_3.ship = ship
   end
 
   def display_board(board)

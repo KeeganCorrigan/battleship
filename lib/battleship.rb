@@ -1,90 +1,20 @@
-# this is just a runner file that starts the program
 require './lib/game_flow'
+require './lib/ship_placement'
 
 game = GameFlow.new
 
-#game start and comuter placement
+#game start and computer placement
 
-puts game.start
-game.quit_play_or_read
-game.place_computer_2_ship
-game.place_computer_3_ship
+input = ''
+puts game.text.play_quit_or_instructions_text
+input = game.player.get_input
+game.text.quit_play_or_read(input)
 valid_input = false
 puts game.text.begin_play_text
-
-# player 2 ship placement
-
-until valid_input == true
-  puts game.text.player_places_two_unit_ship_text
-  input = game.get_player_input
-  player_cell_choice = game.get_player_ship_placement_choice(input)
-  player_cells = game.change_player_ship_placement_to_positions(player_cell_choice)
-  valid_range = game.verify_player_horizontal_vertical_placement(player_cells)
-  valid_size = game.validate_player_ship_length(player_cells, game.player_ship_2)
-
-  if valid_range == false
-    puts game.text.ship_diagonal_placement_text
-  end
-
-  if valid_size == false
-    puts game.text.ship_length_incorrect_or_wrap_attempt
-  end
-
-  if valid_range && valid_size == true
-    valid_input = true
-  end
-end
-
-game.place_player_2_ship(player_cells, game.player_ship_2)
-valid_input = false
-
-# player 3 ship placement validity check
-
-until valid_input == true
-
-  puts game.text.player_places_three_unit_ship_text
-  input = game.get_player_input
-  player_cell_choice = game.get_player_ship_placement_choice(input)
-  player_cells = game.change_player_ship_placement_to_positions(player_cell_choice)
-  valid_range = game.verify_player_horizontal_vertical_placement(player_cells)
-  valid_size = game.validate_player_ship_length(player_cells, game.player_ship_3)
-
-  if valid_range == false
-    puts game.text.ship_diagonal_placement_text
-  end
-
-  if valid_size == false
-    puts game.text.ship_length_incorrect_or_wrap_attempt
-  end
-
-# player ship 3 placement initial verification and middle coordinate generation
-
-  if valid_range && valid_size == true
-    middle = game.game_logic.generate_ship_3_middle_coordinate(player_cells[0], player_cells[1])
-    cell_1 = game.get_cell_position(player_cells[0])
-    cell_2 = game.get_cell_position(player_cells[1])
-    cell_3 = game.get_cell_position(middle)
-    no_overlapping_ships = game.verify_no_ship_in_cell(cell_1, cell_2, cell_3)
-
-#check if overlapping ship
-
-    if no_overlapping_ships == false
-      p game.text.ships_can_not_overlap
-    end
-  end
-
-#final check
-
-  if valid_range && valid_size && no_overlapping_ships == true
-    valid_input = true
-  end
-end
-
-# place player 3 ship
-
-game.place_player_3_ship(cell_1, cell_2, cell_3, game.player_ship_3)
-
-# Player verify firing location
+computer_ship_placement = GameLogic.new(game)
+computer_ship_placement.place_computer_ships
+player_ship_placement = ShipPlacement.new(game)
+player_ship_placement.place_ships
 
 win_state_checker = false
 

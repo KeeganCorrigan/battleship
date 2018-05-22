@@ -9,11 +9,6 @@ class GameLogicTest < Minitest::Test
     assert_instance_of(GameLogic, game)
   end
 
-  def test_it_has_text_class
-    game = GameLogic.new
-    assert_equal Text, game.text.class
-  end
-
   def test_computer_can_choose_first_coordinate_picker_for_2_piece_ship
     game = GameLogic.new
     assert_equal Array, game.first_coordinate_picker.class
@@ -130,5 +125,42 @@ class GameLogicTest < Minitest::Test
     assert_equal 2, game.third_coordinates.length
   end
 
-  
+  def test_place_computer_2_ship
+    game = GameFlow.new
+    ai = GameLogic.new(game)
+    ai.place_computer_2_ship
+    any_cell_has_ship =
+    game.computer_board.any? do |row|
+      row.any? do |cell|
+        cell.ship
+      end
+    end
+    assert_equal true, any_cell_has_ship
+  end
+
+  def test_place_computer_2_ship_places_2_ship_objects
+    game = GameFlow.new
+    ai = GameLogic.new(game)
+    ai.place_computer_2_ship
+    two_cells_have_ships =
+    game.computer_board.map do |row|
+      row.count do |cell|
+        cell.ship
+      end
+    end
+    assert_equal 2, two_cells_have_ships.sum
+  end
+
+  def test_place_computer_3_ship_places_3_ship_objects
+    game = GameFlow.new
+    ai = GameLogic.new(game)
+    ai.place_computer_3_ship
+    three_cells_have_ships =
+    game.computer_board.map do |row|
+      row.count do |cell|
+        cell.ship
+      end
+    end
+    assert_equal 3, three_cells_have_ships.sum
+  end
 end
