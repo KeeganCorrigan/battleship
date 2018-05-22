@@ -1,20 +1,8 @@
+require './lib/game_flow'
+
 class Text
   def play_quit_or_instructions_text
     "Would you like to (p)lay, (q)uit, or view the (i)nstructions?"
-  end
-
-  def quit_play_or_read(input)
-    if input == 'P' || input == 'PLAY'
-      return
-    elsif input == 'Q'|| input == 'QUIT'
-      quit_the_game
-    elsif input == 'I' || input == 'INSTRUCTIONS'
-      puts instruction_text
-      return
-    else
-      puts invalid_starting_choice_text
-      return
-    end
   end
 
   def instruction_text

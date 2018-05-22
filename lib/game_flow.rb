@@ -23,12 +23,39 @@ class GameFlow
     @player = Player.new
   end
 
+  def game_start
+    puts text.play_quit_or_instructions_text
+    input = get_player_input
+    quit_play_or_read(input)
+  end
+
+  def quit_play_or_read(input)
+    if input == 'P' || input == 'PLAY'
+      return
+    elsif input == 'Q'|| input == 'QUIT'
+      quit_the_game
+    elsif input == 'I' || input == 'INSTRUCTIONS'
+      puts text.instruction_text
+      game_start
+    else
+      puts text.invalid_starting_choice_text
+      game_start
+    end
+  end
+
   def quit_the_game
     exit
   end
 
   def get_player_input
     gets.upcase.chomp
+  end
+
+  def verify_no_ship_in_cell(cell1, cell2, cell3)
+    if cell1.ship || cell2.ship || cell3.ship != nil
+      return false
+    end
+    return true
   end
 
   def display_board(board)

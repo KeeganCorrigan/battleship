@@ -22,12 +22,22 @@ class ShipPlacement
   end
 
   def get_player_ship_placement_choice(input)
-    if input.split(" ").length != 2
-      p text.invalid_input
-      input = get_player_input
-      get_player_ship_placement_choice(input)
-    else
+    if validate_player_ship_placement_choices(input) == true
       return input.upcase.split(" ")
+    else
+      p @game.text.invalid_input
+      input = @game.get_player_input
+      get_player_ship_placement_choice(input)
+    end
+  end
+
+  def validate_player_ship_placement_choices(input)
+    input_array = input.split(' ')
+    valid_choices = @game.get_valid_cell_positions_array(@game.player_board)
+    if valid_choices.include?(input_array[0]) && valid_choices.include?(input_array[1])
+      return true
+    else
+      return false
     end
   end
 

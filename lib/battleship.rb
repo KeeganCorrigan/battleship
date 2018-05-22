@@ -3,22 +3,17 @@ require './lib/ship_placement'
 
 game = GameFlow.new
 
-#game start and computer placement
-
-input = ''
-puts game.text.play_quit_or_instructions_text
-input = game.player.get_input
-game.text.quit_play_or_read(input)
-valid_input = false
-puts game.text.begin_play_text
+game.game_start
 computer_ship_placement = GameLogic.new(game)
 computer_ship_placement.place_computer_ships
 player_ship_placement = ShipPlacement.new(game)
 player_ship_placement.place_ships
-
 win_state_checker = false
-
 until win_state_checker == true
+firing_sequence = FiringSequence.new(game)
+firing_sequence.player_fire
+
+
   valid_choice = false
   until valid_choice == true
     puts game.text.player_firing_turn

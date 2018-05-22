@@ -17,10 +17,11 @@ class GameLogicTest < Minitest::Test
 
   def test_second_coordinate
     skip
-    game = GameLogic.new
-    assert_equal 1, game.second_coordinate(2, 0)
-    assert_equal 2, game.second_coordinate(2, 3)
-    # need to test random second coordinate selection. It seems to work, but need an effective way to test 1 of 2 possibilities.
+    # need to test two possibilities!
+    # game = GameLogic.new
+    # expected = [1, 2]
+    # assert_equal expected, game.second_coordinate(2, 0)
+    # || assert_equal 2, game.second_coordinate(2, 3)
   end
 
   def test_horizontal_ship_2

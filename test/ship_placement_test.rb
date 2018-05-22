@@ -12,6 +12,7 @@ class ShipPlacementTest < Minitest::Test
     assert_instance_of(ShipPlacement, ship_placement)
   end
 
+
   def test_get_player_ship_placement_choice
     game = GameFlow.new
     ship_placement = ShipPlacement.new(game)

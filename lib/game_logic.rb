@@ -12,12 +12,11 @@ class GameLogic
   end
 
   def place_computer_ships
-    @game.place_computer_2_ship
-    @game.place_computer_3_ship
+    place_computer_2_ship
+    place_computer_3_ship
   end
 
   def place_computer_2_ship
-    binding.pry
     create_ship_coordinates(@game.comp_ship_2)
     @game.computer_board[first_coordinates[0]][first_coordinates[1]].ship = @game.comp_ship_2
     @game.computer_board[second_coordinates[0]][second_coordinates[1]].ship = @game.comp_ship_2
@@ -30,18 +29,11 @@ class GameLogic
       first_ship_cell =    @game.computer_board[first_coordinates[0]][first_coordinates[1]]
       second_ship_cell = @game.computer_board[second_coordinates[0]][second_coordinates[1]]
       third_ship_cell = @game.computer_board[third_coordinates[0]][third_coordinates[1]]
-      no_overlapping_ships = verify_no_ship_in_cell(first_ship_cell, second_ship_cell, third_ship_cell)
+      no_overlapping_ships = @game.verify_no_ship_in_cell(first_ship_cell, second_ship_cell, third_ship_cell)
     end
     first_ship_cell.ship = @game.comp_ship_3
     second_ship_cell.ship = @game.comp_ship_3
     third_ship_cell.ship = @game.comp_ship_3
-  end
-
-  def verify_no_ship_in_cell(cell1, cell2, cell3)
-    if cell1.ship || cell2.ship || cell3.ship != nil
-      return false
-    end
-    return true
   end
 
   def first_coordinate_picker
