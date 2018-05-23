@@ -5,7 +5,7 @@ require './lib/game_board'
 require './lib/text'
 require './lib/game_logic'
 require './lib/cell'
-require './lib/player'
+require './lib/firing_sequence'
 
 class GameFlow
 
@@ -20,7 +20,7 @@ class GameFlow
     @player_ship_3 = Ship.new(3, "Destroyer", "3")
     @player_board = GameBoard.new.create_board
     @game_logic = GameLogic.new
-    @player = Player.new
+    @time = nil
   end
 
   def game_start
@@ -31,6 +31,7 @@ class GameFlow
 
   def quit_play_or_read(input)
     if input == 'P' || input == 'PLAY'
+      @time = Time.now
       return
     elsif input == 'Q'|| input == 'QUIT'
       quit_the_game
@@ -89,9 +90,18 @@ class GameFlow
     return ship_hits
   end
 
-  def win_state(board)
+  def time_calculator
+    Time.now - @time
+  end
+
+  def win_state(board, board_1, shots_fired)
     if count_hits_on_ships(board) == 5
+      puts text.congratulations_you_win_text
+      puts text.number_of_guesses_and_time_text(time_calculator, shots_fired)
       return true
+    elsif count_hits_on_ships(board_1) == 5
+      puts text.loss_text
+      puts text.number_of_guesses_and_time_text(time_calculator, shots_fired)
     else
       return false
     end

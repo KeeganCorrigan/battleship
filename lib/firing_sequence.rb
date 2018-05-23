@@ -1,6 +1,9 @@
 class FiringSequence
+  attr_reader :shots_fired
+
   def initialize(game)
     @game = game
+    @shots_fired = 0
   end
 
   def player_fires_shots
@@ -19,6 +22,7 @@ class FiringSequence
       end
     end
     player_fires(cell)
+    firing_counter
   end
 
   def player_fires(cell)
@@ -113,5 +117,9 @@ class FiringSequence
         puts @game.text.confirm_your_ship_was_sunk(cell.ship.name)
       end
     end
+  end
+
+  def firing_counter
+    @shots_fired += 1
   end
 end
