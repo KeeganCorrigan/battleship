@@ -34,7 +34,7 @@ class ShipPlacement
   def validate_player_ship_placement_choices(input)
     input_array = input.split(' ')
     valid_choices = @game.get_valid_cell_positions_array(@game.player_board)
-    if valid_choices.include?(input_array[0]) && valid_choices.include?(input_array[1])
+    if valid_choices.include?(input_array[0]) && valid_choices.include?(input_array[1]) && input_array.length == 2
       return true
     else
       return false
@@ -95,7 +95,7 @@ class ShipPlacement
     @game.get_player_input
   end
 
-  def validate_player_ship_2_position(input, player_cells)
+  def validate_player_ship_2_position(player_cells)
     valid_input = false
     valid_range = verify_player_horizontal_vertical_placement(player_cells)
     valid_size = validate_player_ship_length(player_cells, @game.player_ship_2)
@@ -117,7 +117,7 @@ class ShipPlacement
       input = get_player_ship_position
       player_cell_choice = get_player_ship_placement_choice(input)
       player_cells = change_player_ship_placement_to_positions(player_cell_choice)
-      valid_input = validate_player_ship_2_position(input, player_cells)
+      valid_input = validate_player_ship_2_position(player_cells)
     end
     return player_cells
   end

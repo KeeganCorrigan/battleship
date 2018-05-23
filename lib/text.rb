@@ -116,6 +116,6 @@ class Text
   end
 
   def number_of_guesses_and_time_text(time, shots_fired)
-    "You fired #{shots_fired} and it took #{time / 60} minutes and #{time / 60 % 60} seconds"
+    "You fired #{shots_fired} shots and it took #{time / 60} minutes and #{time % 60} seconds to complete the game."
   end
 end
