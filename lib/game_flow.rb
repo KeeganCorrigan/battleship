@@ -75,21 +75,11 @@ class GameFlow
     return valid_inputs
   end
 
-  def fire_at_ships(cell)
-    if cell.state == "~"
-      cell.change_state
-    end
-  end
-
   def get_cell_state(input, board)
     cell = board.flatten.find do |cell|
       cell.position == input
     end
     return cell
-  end
-
-  def computer_fire_at_ships(board)
-    get_valid_cell_positions_array(board).sample
   end
 
   def count_hits_on_ships(board)

@@ -71,7 +71,7 @@ class Text
     "That square is invalid."
   end
 
-  def player_already_fired_on_same_sqaure_text
+  def player_already_fired_on_same_square_text
     "You have already fired on that square."
   end
 
@@ -84,7 +84,7 @@ class Text
   end
 
   def confirm_your_ship_was_sunk(ship_name)
-    "Your #{ship_name} was sunk."
+    "Your #{ship_name} was sunk. The machines have defended their homeland."
   end
 
   def confirm_computer_ship_was_sunk(ship_name, size)
@@ -94,7 +94,6 @@ class Text
   def confirm_computer_firing_location(cell)
     "The machines fired at #{cell}."
   end
-
 
   def confirm_computer_hit_text
     "The computer hit you. The sentient machines killed #{rand(2..100)} sailors."
