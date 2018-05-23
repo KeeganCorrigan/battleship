@@ -1,7 +1,6 @@
 require './test/test_helper'
 require './lib/game_board'
 require './lib/cell'
-require 'pry'
 
 class GameBoardTest < Minitest::Test
   def test_it_exists

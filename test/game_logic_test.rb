@@ -1,6 +1,5 @@
 require './test/test_helper'
 require './lib/game_logic'
-require './lib/text'
 require 'pry'
 
 class GameLogicTest < Minitest::Test
@@ -16,12 +15,15 @@ class GameLogicTest < Minitest::Test
   end
 
   def test_second_coordinate
-    skip
-    # need to test two possibilities!
-    # game = GameLogic.new
-    # expected = [1, 2]
-    # assert_equal expected, game.second_coordinate(2, 0)
-    # || assert_equal 2, game.second_coordinate(2, 3)
+    game = GameLogic.new
+    actual = game.second_coordinate_picker(2, 0)
+    assert actual == 1
+    actual = game.second_coordinate_picker(2, 3)
+    assert actual == 2
+    actual = game.second_coordinate_picker(3, 3)
+    assert actual == 1
+    actual = game.second_coordinate_picker(3, 0)
+    assert actual == 2
   end
 
   def test_horizontal_ship_2
@@ -163,5 +165,18 @@ class GameLogicTest < Minitest::Test
       end
     end
     assert_equal 3, three_cells_have_ships.sum
+  end
+
+  def test_place_computer_ships
+    game = GameFlow.new
+    ai = GameLogic.new(game)
+    ai.place_computer_ships
+    five_cells_have_ships =
+    game.computer_board.map do |row|
+      row.count do |cell|
+        cell.ship
+      end
+    end
+    assert_equal 5, five_cells_have_ships.sum
   end
 end

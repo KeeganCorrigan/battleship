@@ -50,7 +50,6 @@ class Text
     "Try again in the right format: A1 A2"
   end
 
-
   def ship_diagonal_placement_text
     "Ships couldn't possibly go diagonal. Try again"
   end
@@ -91,6 +90,14 @@ class Text
     "You sunk the #{ship_name}. It took up #{size} squares."
   end
 
+  def you_sunk_my_battleship
+    `say You Sunk My Battleship`
+  end
+
+  def computer_sunk_a_battleship
+    `say The water muffles your sailors screams as they sink to the bottom`
+  end
+
   def confirm_computer_firing_location(cell)
     "The machines fired at #{cell}."
   end
@@ -101,6 +108,14 @@ class Text
 
   def confirm_computer_miss_text
     "The computer missed you. The AI is very simple."
+  end
+
+  def press_enter_to_continue
+    "PRESS ENTER TO CONTINUE. Please. If not for me, for yourself."
+  end
+
+  def say_congratulations
+    `say You've continued the cycle of violence for another generation. Congratulations.`
   end
 
   def congratulations_you_win_text
