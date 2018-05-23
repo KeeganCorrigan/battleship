@@ -18,7 +18,7 @@ class Cell
   end
 
   def change_state
-    if @ship != nil
+    if @ship
       hit_state
     else
       miss_state

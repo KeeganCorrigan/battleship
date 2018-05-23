@@ -115,7 +115,7 @@ class Text
   end
 
   def say_congratulations
-    `say You've continued the cycle of violence for another generation. Congratulations.`
+    `say You have continued the cycle of violence for another generation congratulations`
   end
 
   def congratulations_you_win_text

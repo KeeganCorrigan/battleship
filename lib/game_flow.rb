@@ -96,15 +96,27 @@ class GameFlow
     Time.now.to_i - @time
   end
 
+  def player_wins
+    text.say_congratulations
+    puts text.congratulations_you_win_text
+    puts text.number_of_guesses_and_time_text(time_calculator, shots_fired)
+    long_pause
+    quit_the_game
+  end
+
+  def computer_wins
+    puts text.loss_text
+    puts text.number_of_guesses_and_time_text(time_calculator, shots_fired)
+    long_pause
+    long_pause
+    quit_the_game
+  end
+
   def win_state(board, board_1, shots_fired)
     if count_hits_on_ships(board) == 5
-      text.say_congratulations
-      puts text.congratulations_you_win_text
-      puts text.number_of_guesses_and_time_text(time_calculator, shots_fired)
-      return true
+      player_wins
     elsif count_hits_on_ships(board_1) == 5
-      puts text.loss_text
-      puts text.number_of_guesses_and_time_text(time_calculator, shots_fired)
+      computer_wins
     else
       return false
     end

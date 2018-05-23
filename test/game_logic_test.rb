@@ -94,7 +94,6 @@ class GameLogicTest < Minitest::Test
   end
 
   def test_generates_first_and_second_coordinates_for_3_ship
-    skip
     game = GameLogic.new
     ship_3 = Ship.new(3)
     game.create_ship_coordinates(ship_3)
@@ -116,7 +115,6 @@ class GameLogicTest < Minitest::Test
   end
 
   def test_generate_all_3_coordinates_for_middle_ship
-    skip
     game = GameLogic.new
     ship_3 = Ship.new(3)
     game.create_ship_coordinates(ship_3)

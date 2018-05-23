@@ -116,6 +116,29 @@ class FiringSequenceTest < Minitest::Test
     cell = Cell.new("A1")
     refute fire.cell_state_miss(cell, game.player_board)
     fire.fire_at_ships(cell)
-    assert_nil fire.cell_state_miss(cell, game.player_board)
+    assert 1, fire.cell_state_miss(cell, game.player_board)
+  end
+
+  def test_player_fires
+    game = GameFlow.new
+    fire = FiringSequence.new(game)
+    cell = Cell.new("A1")
+    expected = fire.player_fires(cell)
+    assert_nil expected
+  end
+
+  def test_player_fires_shots
+    game = GameFlow.new
+    fire = FiringSequence.new(game)
+    cell = Cell.new("A1")
+    expected = fire.player_fires_shots
+    assert 1, expected
+  end
+
+  def test_computer_fires_shots
+    game = GameFlow.new
+    fire = FiringSequence.new(game)
+    cell = Cell.new("A1")
+    refute fire.computer_fires_shots
   end
 end

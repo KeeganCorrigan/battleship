@@ -12,5 +12,6 @@ player_ship_placement.place_ships
 firing_sequence = FiringSequence.new(game)
 until game.win_state(game.computer_board, game.player_board, firing_sequence.shots_fired) == true
   firing_sequence.player_fires_shots
+  game.win_state(game.computer_board, game.player_board, firing_sequence.shots_fired)
   firing_sequence.computer_fires_shots
 end

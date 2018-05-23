@@ -17,7 +17,7 @@ class TextTest < Minitest::Test
   def test_confirm_computer_ship_was_sunk
     game = GameFlow.new
     text = Text.new
-    assert_equal "You sunk the Peaceful fishing boat. It took up 2 squares.",
+    assert_equal "You sunk the Orphaned puppy adventure cruise. It took up 2 squares.",
     text.confirm_computer_ship_was_sunk(game.comp_ship_2.name, game.comp_ship_2.size)
   end
 
