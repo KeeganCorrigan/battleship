@@ -26,9 +26,7 @@ class GameFlowTest < Minitest::Test
     game_logic.place_computer_2_ship
     game_logic.place_computer_3_ship
     five_cells_with_ship = game.computer_board.map do |row|
-      row.count do |cell|
-        cell.ship
-      end
+      row.count(&:ship)
     end
     assert_equal 5, five_cells_with_ship.sum
   end
@@ -36,13 +34,13 @@ class GameFlowTest < Minitest::Test
   def test_get_valid_cell_positions_array
     game = GameFlow.new
     actual = game.get_valid_cell_positions_array(game.player_board)
-    assert_equal "A1", actual[0]
-    assert_equal "D4", actual[15]
+    assert_equal 'A1', actual[0]
+    assert_equal 'D4', actual[15]
   end
 
   def test_time_calculator
     game = GameFlow.new
-    game.quit_play_or_read("P")
+    game.quit_play_or_read('P')
     sleep(1)
     assert_equal 1, game.time_calculator
   end

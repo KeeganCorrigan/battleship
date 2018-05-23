@@ -7,7 +7,7 @@ class FiringSequence
   end
 
   def player_fires_shots
-    display_board(@game.computer_board, "The Anonymous Enemy")
+    display_board(@game.computer_board, 'The Anonymous Enemy')
     valid_choice = false
     until valid_choice == true
       puts @game.text.player_firing_turn
@@ -31,7 +31,7 @@ class FiringSequence
   def player_fires(cell)
     fire_at_ships(cell)
     change_cell_state(cell, @game.computer_board)
-    display_board(@game.computer_board, "The Anonymous Enemy")
+    display_board(@game.computer_board, 'The Anonymous Enemy')
     puts @game.text.press_enter_to_continue
     @game.player_press_enter
     verify_computer_ship_sunk(cell)
@@ -54,7 +54,7 @@ class FiringSequence
     @game.small_pause
     fire_at_ships(cell)
     change_cell_state(cell, @game.player_board)
-    display_board(@game.player_board, "The Player, who thinks they're a hero")
+    display_board(@game.player_board, 'The Player')
     @game.long_pause
     @game.clear_screen
     verify_player_ship_sunk(cell)
@@ -66,35 +66,33 @@ class FiringSequence
   end
 
   def cell_state_hit(cell, board)
-    if cell.state == "H"
+    if cell.state == 'H'
       if board == @game.computer_board
         puts @game.text.confirm_player_hit_text
-        @game.small_pause
       else
         puts @game.text.confirm_computer_hit_text
-        @game.small_pause
       end
+      @game.small_pause
       cell.ship.take_hit
     end
   end
 
   def cell_state_miss(cell, board)
-    if cell.state == "M"
+    if cell.state == 'M'
       if board == @game.computer_board
         puts @game.text.confirm_player_miss_text
-        @game.small_pause
       else
         puts @game.text.confirm_computer_miss_text
-        @game.small_pause
       end
+      @game.small_pause
     end
   end
 
   def get_cell_state(input, board)
-    cell = board.flatten.find do |cell|
+    cells = board.flatten.find do |cell|
       cell.position == input
     end
-    return cell
+    return cells
   end
 
   def validate_cell_input(input)
@@ -106,7 +104,7 @@ class FiringSequence
   end
 
   def validate_cell_state(cell)
-    if cell.state != "~"
+    if cell.state != '~'
       return false
     else
       return true
@@ -114,9 +112,7 @@ class FiringSequence
   end
 
   def fire_at_ships(cell)
-    if cell.state == "~"
-      cell.change_state
-    end
+    cell.change_state if validate_cell_state(cell) == true
   end
 
   def computer_fire_at_ships(board)
@@ -124,7 +120,7 @@ class FiringSequence
   end
 
   def verify_computer_ship_sunk(cell)
-    if cell.ship != nil
+    if !cell.ship.nil?
       if cell.ship.sunk == true
         @game.text.you_sunk_my_battleship
         puts @game.text.confirm_computer_ship_was_sunk(cell.ship.name, cell.ship.size)
@@ -134,7 +130,7 @@ class FiringSequence
   end
 
   def verify_player_ship_sunk(cell)
-    if cell.ship!= nil
+    if !cell.ship.nil?
       if cell.ship.sunk == true
         @game.text.computer_sunk_a_battleship
         puts @game.text.confirm_your_ship_was_sunk(cell.ship.name)

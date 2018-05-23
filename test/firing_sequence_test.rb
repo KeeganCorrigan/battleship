@@ -34,7 +34,7 @@ class FiringSequenceTest < Minitest::Test
   def test_verify_player_ship_sunk
     game = GameFlow.new
     fire = FiringSequence.new(game)
-    cell = Cell.new("A1")
+    cell = Cell.new('A1')
     refute fire.verify_player_ship_sunk(cell)
     ship = Ship.new(1)
     ship.sunk == true
@@ -45,7 +45,7 @@ class FiringSequenceTest < Minitest::Test
   def test_verify_computer_ship_sunk
     game = GameFlow.new
     fire = FiringSequence.new(game)
-    cell = Cell.new("A1")
+    cell = Cell.new('A1')
     refute fire.verify_computer_ship_sunk(cell)
     ship = Ship.new(1)
     ship.sunk == true
@@ -63,28 +63,28 @@ class FiringSequenceTest < Minitest::Test
   def test_fire_at_ships
     game = GameFlow.new
     fire = FiringSequence.new(game)
-    cell = Cell.new("A1")
+    cell = Cell.new('A1')
     fire.fire_at_ships(cell)
-    assert_equal "M", cell.state
+    assert_equal 'M', cell.state
     ship = Ship.new(1)
-    new_cell = Cell.new("A1")
+    new_cell = Cell.new('A1')
     new_cell.ship = ship
     fire.fire_at_ships(new_cell)
-    assert_equal "H", new_cell.state
+    assert_equal 'H', new_cell.state
   end
 
   def test_get_cell_state
     game = GameFlow.new
     fire = FiringSequence.new(game)
-    input = "A1"
+    input = 'A1'
     actual = fire.get_cell_state(input, game.computer_board)
-    assert_equal "~", actual.state
+    assert_equal '~', actual.state
   end
 
   def test_validate_cell_state
     game = GameFlow.new
     fire = FiringSequence.new(game)
-    cell = Cell.new("A1")
+    cell = Cell.new('A1')
     assert fire.validate_cell_state(cell)
     fire.fire_at_ships(cell)
     refute fire.validate_cell_state(cell)
@@ -93,16 +93,16 @@ class FiringSequenceTest < Minitest::Test
   def test_validate_cell_input
     game = GameFlow.new
     fire = FiringSequence.new(game)
-    input = "A1"
+    input = 'A1'
     assert fire.validate_cell_input(input)
-    input = "D5"
+    input = 'D5'
     refute fire.validate_cell_input(input)
   end
 
   def test_cell_state_hit
     game = GameFlow.new
     fire = FiringSequence.new(game)
-    cell = Cell.new("A1")
+    cell = Cell.new('A1')
     ship = Ship.new(1)
     refute fire.cell_state_hit(cell, game.player_board)
     cell.ship = ship
@@ -113,7 +113,7 @@ class FiringSequenceTest < Minitest::Test
   def test_cell_state_miss
     game = GameFlow.new
     fire = FiringSequence.new(game)
-    cell = Cell.new("A1")
+    cell = Cell.new('A1')
     refute fire.cell_state_miss(cell, game.player_board)
     fire.fire_at_ships(cell)
     assert 1, fire.cell_state_miss(cell, game.player_board)
@@ -122,7 +122,7 @@ class FiringSequenceTest < Minitest::Test
   def test_player_fires
     game = GameFlow.new
     fire = FiringSequence.new(game)
-    cell = Cell.new("A1")
+    cell = Cell.new('A1')
     expected = fire.player_fires(cell)
     assert_nil expected
   end
@@ -130,7 +130,6 @@ class FiringSequenceTest < Minitest::Test
   def test_player_fires_shots
     game = GameFlow.new
     fire = FiringSequence.new(game)
-    cell = Cell.new("A1")
     expected = fire.player_fires_shots
     assert 1, expected
   end
@@ -138,7 +137,13 @@ class FiringSequenceTest < Minitest::Test
   def test_computer_fires_shots
     game = GameFlow.new
     fire = FiringSequence.new(game)
-    cell = Cell.new("A1")
     refute fire.computer_fires_shots
+  end
+
+  def test_display_board_interpolates
+    game = GameFlow.new
+    fire = FiringSequence.new(game)
+    actual = fire.display_board(game.player_board, 'Billy')
+    assert_nil actual
   end
 end
