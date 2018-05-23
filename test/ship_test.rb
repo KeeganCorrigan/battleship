@@ -13,6 +13,16 @@ class ShipTest < Minitest::Test
     assert_equal 2, ship_1.length
   end
 
+  def test_it_has_a_name
+    ship_1 = Ship.new(2, "Schooner")
+    assert_equal "Schooner", ship_1.name
+  end
+
+  def test_it_has_a_size
+    ship_1 = Ship.new(2, "Schooner", "2")
+    assert_equal "2", ship_1.size
+  end
+
   def test_length_can_decrease
     ship_1 = Ship.new(2)
     assert_equal 1, ship_1.take_hit
@@ -23,5 +33,13 @@ class ShipTest < Minitest::Test
     ship_1.take_hit
     ship_1.take_hit
     assert_equal true, ship_1.sunk
+  end
+
+  def test_sink_counter_increments
+    ship_1 = Ship.new(2)
+    ship_1.take_hit
+    ship_1.take_hit
+    ship_1.sunk
+    assert_equal 1, ship_1.sink_counter
   end
 end

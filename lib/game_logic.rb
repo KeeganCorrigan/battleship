@@ -3,13 +3,37 @@ require './lib/game_board'
 require './lib/text'
 require './lib/ship'
 require './lib/game_flow'
-require 'pry'
 
 class GameLogic
-  attr_reader :text, :first_coordinates, :second_coordinates, :third_coordinates
+  attr_reader :first_coordinates, :second_coordinates, :third_coordinates
 
-  def initialize
-    @text = Text.new
+  def initialize(game = nil)
+    @game = game
+  end
+
+  def place_computer_ships
+    place_computer_2_ship
+    place_computer_3_ship
+  end
+
+  def place_computer_2_ship
+    create_ship_coordinates(@game.comp_ship_2)
+    @game.computer_board[first_coordinates[0]][first_coordinates[1]].ship = @game.comp_ship_2
+    @game.computer_board[second_coordinates[0]][second_coordinates[1]].ship = @game.comp_ship_2
+  end
+
+  def place_computer_3_ship
+    no_overlapping_ships = false
+    until no_overlapping_ships == true
+      create_ship_coordinates(@game.comp_ship_3)
+      first_ship_cell =    @game.computer_board[first_coordinates[0]][first_coordinates[1]]
+      second_ship_cell = @game.computer_board[second_coordinates[0]][second_coordinates[1]]
+      third_ship_cell = @game.computer_board[third_coordinates[0]][third_coordinates[1]]
+      no_overlapping_ships = @game.verify_no_ship_in_cell(first_ship_cell, second_ship_cell, third_ship_cell)
+    end
+    first_ship_cell.ship = @game.comp_ship_3
+    second_ship_cell.ship = @game.comp_ship_3
+    third_ship_cell.ship = @game.comp_ship_3
   end
 
   def first_coordinate_picker

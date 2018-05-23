@@ -1,30 +1,32 @@
+require './lib/game_flow'
+
 class Text
   def play_quit_or_instructions_text
     "Would you like to (p)lay, (q)uit, or view the (i)nstructions?"
   end
 
   def instruction_text
-    "At the beginning of the game, the player and computer opponent will place 2 ships on the board(a 2 unit ship, and a 3 unit ship). The board is a 4 x 4 grid, like this:"
+    "At the beginning of the game, the player and computer opponent will place 2 ships on the board(a 2 unit ship, and a 3 unit ship). The board is a 4 x 4 grid, like this:
 
-    "          ===========\n
+               ===========\n
           . 1 2 3 4  \n
           A          \n
           B          \n
           C          \n
           D          \n
-          ===========\n"
+          ===========\n
 
-    "*  Ships cannot wrap around the board"
-    "------------------"
-    "*  Ships cannot overlap"
-    "------------------"
-    "*  Ships can be laid either horizontally or vertically"
-    "------------------"
-    "*  Coordinates must correspond to the first and last units of the ship. (IE: You can’t place a two unit ship at “A1 A3”)"
-    "------------------"
-    "To place a ship, use the following format: A1, A2"
-    "------------------"
-    "You will go first and will pick a square, typing it in by reference of column reference, row number (A3 for example). This represents firing a missile directly at that square. If the computer player has any part of one of their ships positioned on this square the map will update with an H. The computer will then fire and the player will be informed if it was a hit or a miss and they will see an updated. Once all ships on one side have been sunk the game is over."
+     *  Ships cannot wrap around the board\n
+     ------------------\n
+     *  Ships cannot overlap\n
+     ------------------
+     *  Ships can be laid either horizontally or vertically\n
+     ------------------
+     *  Coordinates must correspond to the first and last units of the ship. (IE: You can’t place a two unit ship at “A1 A3”)\n
+     ------------------
+    To place a ship, use the following format: A1, A2\n
+    ------------------
+    You will go first and will pick a square, typing it in by reference of column reference, row number (A3 for example). This represents firing a missile directly at that square. If the computer player has any part of one of their ships positioned on this square the map will update with an H. The computer will then fire and the player will be informed if it was a hit or a miss and they will see an updated. Once all ships on one side have been sunk the game is over."
   end
 
   def begin_play_text
@@ -69,7 +71,7 @@ class Text
     "That square is invalid."
   end
 
-  def player_already_fired_on_same_sqaure_text
+  def player_already_fired_on_same_square_text
     "You have already fired on that square."
   end
 
@@ -77,13 +79,20 @@ class Text
     "That's a hit. You killed #{rand(2..100)} sailors."
   end
 
-  def confirm_computer_firing_location(cell)
-    "The machines fired at #{cell}."
-  end
-
-
   def confirm_player_miss_text
     "It's a miss. You failed to kill someone's family member."
+  end
+
+  def confirm_your_ship_was_sunk(ship_name)
+    "Your #{ship_name} was sunk. The machines have defended their homeland."
+  end
+
+  def confirm_computer_ship_was_sunk(ship_name, size)
+    "You sunk the #{ship_name}. It took up #{size} squares."
+  end
+
+  def confirm_computer_firing_location(cell)
+    "The machines fired at #{cell}."
   end
 
   def confirm_computer_hit_text
@@ -106,8 +115,7 @@ class Text
     "Would you like to play again?"
   end
 
-  def number_of_guesses_and_time_text
-    #add interpolation for guesses and time
-    "You took this many guesses and it took this long"
+  def number_of_guesses_and_time_text(time, shots_fired)
+    "You fired #{shots_fired} and it took #{time / 60} minutes and #{time / 60 % 60} seconds"
   end
 end
