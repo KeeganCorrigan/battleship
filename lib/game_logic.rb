@@ -1,6 +1,5 @@
 require './lib/cell'
 require './lib/game_board'
-require './lib/text'
 require './lib/ship'
 require './lib/game_flow'
 

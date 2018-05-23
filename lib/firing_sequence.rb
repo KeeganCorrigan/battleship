@@ -1,5 +1,5 @@
 class FiringSequence
-  attr_reader :shots_fired
+  attr_reader :shots_fired, :game
 
   def initialize(game)
     @game = game
@@ -7,12 +7,14 @@ class FiringSequence
   end
 
   def player_fires_shots
+    display_board(@game.computer_board, "The Anonymous Enemy")
     valid_choice = false
     until valid_choice == true
       puts @game.text.player_firing_turn
+      @game.small_pause
       input = @game.get_player_input
       if validate_cell_input(input) == true
-        cell = @game.get_cell_state(input, @game.computer_board)
+        cell = get_cell_state(input, @game.computer_board)
         valid_choice = validate_cell_state(cell)
         if valid_choice == false
           puts @game.text.player_already_fired_on_same_square_text
@@ -21,6 +23,7 @@ class FiringSequence
         puts @game.text.player_invalid_fire_Square_selection_text
       end
     end
+    @game.clear_screen
     player_fires(cell)
     firing_counter
   end
@@ -28,7 +31,9 @@ class FiringSequence
   def player_fires(cell)
     fire_at_ships(cell)
     change_cell_state(cell, @game.computer_board)
-    @game.display_board(@game.computer_board)
+    display_board(@game.computer_board, "The Anonymous Enemy")
+    puts @game.text.press_enter_to_continue
+    @game.player_press_enter
     verify_computer_ship_sunk(cell)
   end
 
@@ -36,7 +41,7 @@ class FiringSequence
     valid_choice = false
     until valid_choice == true
       input = computer_fire_at_ships(@game.player_board)
-      cell = @game.get_cell_state(input, @game.player_board)
+      cell = get_cell_state(input, @game.player_board)
       valid_choice = validate_cell_state(cell)
     end
     return cell
@@ -44,10 +49,14 @@ class FiringSequence
 
   def computer_fires_shots
     cell = computer_validates_shot
+    @game.clear_screen
     puts @game.text.confirm_computer_firing_location(cell.position)
+    @game.small_pause
     fire_at_ships(cell)
     change_cell_state(cell, @game.player_board)
-    @game.display_board(@game.player_board)
+    display_board(@game.player_board, "The Player, who thinks they're a hero")
+    @game.long_pause
+    @game.clear_screen
     verify_player_ship_sunk(cell)
   end
 
@@ -60,8 +69,10 @@ class FiringSequence
     if cell.state == "H"
       if board == @game.computer_board
         puts @game.text.confirm_player_hit_text
+        @game.small_pause
       else
         puts @game.text.confirm_computer_hit_text
+        @game.small_pause
       end
       cell.ship.take_hit
     end
@@ -71,10 +82,19 @@ class FiringSequence
     if cell.state == "M"
       if board == @game.computer_board
         puts @game.text.confirm_player_miss_text
+        @game.small_pause
       else
         puts @game.text.confirm_computer_miss_text
+        @game.small_pause
       end
     end
+  end
+
+  def get_cell_state(input, board)
+    cell = board.flatten.find do |cell|
+      cell.position == input
+    end
+    return cell
   end
 
   def validate_cell_input(input)
@@ -106,7 +126,9 @@ class FiringSequence
   def verify_computer_ship_sunk(cell)
     if cell.ship != nil
       if cell.ship.sunk == true
+        @game.text.you_sunk_my_battleship
         puts @game.text.confirm_computer_ship_was_sunk(cell.ship.name, cell.ship.size)
+        @game.small_pause
       end
     end
   end
@@ -114,12 +136,25 @@ class FiringSequence
   def verify_player_ship_sunk(cell)
     if cell.ship!= nil
       if cell.ship.sunk == true
+        @game.text.computer_sunk_a_battleship
         puts @game.text.confirm_your_ship_was_sunk(cell.ship.name)
+        @game.small_pause
       end
     end
   end
 
   def firing_counter
     @shots_fired += 1
+  end
+
+  def display_board(board, owner)
+    puts "      #{owner.upcase}"
+    puts "          ===========\n
+          . 1 2 3 4  \n
+          A #{board[0][0].state} #{board[0][1].state} #{board[0][2].state} #{board[0][3].state}         \n
+          B #{board[1][0].state} #{board[1][1].state} #{board[1][2].state} #{board[1][3].state}         \n
+          C #{board[2][0].state} #{board[2][1].state} #{board[2][2].state} #{board[2][3].state}           \n
+          D #{board[3][0].state} #{board[3][1].state} #{board[3][2].state} #{board[3][3].state}         \n
+          ===========\n"
   end
 end

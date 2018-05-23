@@ -1,7 +1,6 @@
 require './test/test_helper'
 require './lib/cell.rb'
 require './lib/ship.rb'
-require 'pry'
 
 class CellTest < Minitest::Test
   def test_it_exists
@@ -14,15 +13,26 @@ class CellTest < Minitest::Test
     assert_equal "A1", cell.position
   end
 
-  def test_it_can_be_hit
+  def test_default_values
+    cell = Cell.new("A1")
+    refute cell.hit
+    refute cell.miss
+    assert_nil cell.ship
+  end
+
+  def test_it_starts_with_default_state
+    cell = Cell.new("A1")
+    assert_equal '~', cell.state
+  end
+
+  def test_it_can_change_state_to_hit
     cell = Cell.new("A1")
     ship = Ship.new(2)
     cell.ship = ship
-    binding.pry
     assert_equal "H", cell.change_state
   end
 
-  def test_it_can_be_missed
+  def test_it_can_change_state_to_miss
     cell = Cell.new("A1")
     assert_equal "M", cell.change_state
   end
@@ -34,8 +44,4 @@ class CellTest < Minitest::Test
     assert_equal 2, cell.ship.length
   end
 
-  def test_it_starts_with_default_state
-    cell = Cell.new("A1")
-    assert_equal '~', cell.state
-  end
 end

@@ -19,6 +19,8 @@ class ShipPlacement
       valid_input = validate_player_ship_3_position(player_cells)
     end
     place_player_3_ship
+    @game.small_pause
+    @game.clear_screen
   end
 
   def get_player_ship_placement_choice(input)
