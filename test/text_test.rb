@@ -29,7 +29,6 @@ class TextTest < Minitest::Test
   end
 
   def test_number_of_guesses_and_time_text
-    game = GameFlow.new
     text = Text.new
     time_start = Time.new.to_i
     sleep(1)

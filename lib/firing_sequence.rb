@@ -1,3 +1,5 @@
+require 'colorize'
+
 class FiringSequence
   attr_reader :shots_fired, :game
 
@@ -66,7 +68,7 @@ class FiringSequence
   end
 
   def cell_state_hit(cell, board)
-    if cell.state == 'H'
+    if cell.state == 'H'.red
       if board == @game.computer_board
         puts @game.text.confirm_player_hit_text
       else
@@ -104,7 +106,7 @@ class FiringSequence
   end
 
   def validate_cell_state(cell)
-    if cell.state != '~'
+    if cell.state != '~'.blue
       return false
     else
       return true

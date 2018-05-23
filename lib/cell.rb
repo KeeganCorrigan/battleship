@@ -1,4 +1,5 @@
 require './lib/ship'
+require 'colorize'
 
 class Cell
   attr_reader :position
@@ -14,7 +15,7 @@ class Cell
   end
 
   def default_state
-    '~'
+    '~'.blue
   end
 
   def change_state
@@ -26,7 +27,7 @@ class Cell
   end
 
   def hit_state
-    @state = 'H'
+    @state = 'H'.red
   end
 
   def miss_state

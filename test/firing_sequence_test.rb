@@ -70,7 +70,7 @@ class FiringSequenceTest < Minitest::Test
     new_cell = Cell.new('A1')
     new_cell.ship = ship
     fire.fire_at_ships(new_cell)
-    assert_equal 'H', new_cell.state
+    assert_equal "\e[0;31;49mH\e[0m", new_cell.state
   end
 
   def test_get_cell_state
@@ -78,7 +78,7 @@ class FiringSequenceTest < Minitest::Test
     fire = FiringSequence.new(game)
     input = 'A1'
     actual = fire.get_cell_state(input, game.computer_board)
-    assert_equal '~', actual.state
+    assert_equal "\e[0;34;49m~\e[0m", actual.state
   end
 
   def test_validate_cell_state

@@ -5,6 +5,7 @@ require './lib/text'
 require './lib/game_logic'
 require './lib/cell'
 require './lib/firing_sequence'
+require 'colorize'
 
 class GameFlow
   attr_reader :text, :comp_ship_2, :comp_ship_3, :computer_board, :player_ship_2, :player_ship_3, :player_board, :game_logic, :player
@@ -30,6 +31,7 @@ class GameFlow
   def quit_play_or_read(input)
     if %w[P PLAY].include?(input)
       clear_screen
+      puts text.battleship_ascii
       @time = Time.now.to_i
       return
     elsif %w[Q QUIT].include?(input)
@@ -83,7 +85,7 @@ class GameFlow
 
   def count_hits_on_ships(board)
     ship_hits = board.flatten.count do |cell|
-      cell.state == 'H'
+      cell.state == 'H'.red
     end
     return ship_hits
   end
