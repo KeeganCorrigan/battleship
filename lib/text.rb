@@ -115,7 +115,7 @@ class Text
   end
 
   def say_congratulations
-    `say You've continued the cycle of violence for another generation. Congratulations.`
+    `say You have continued the cycle of violence for another generation congratulations`
   end
 
   def congratulations_you_win_text
@@ -132,5 +132,21 @@ class Text
 
   def number_of_guesses_and_time_text(time, shots_fired)
     "You fired #{shots_fired} shots and it took #{time / 60} minutes and #{time % 60} seconds to complete the game."
+  end
+
+  def battleship_ascii
+    "                                     |__
+                                     |/
+                                     ---
+                                     / | [
+                              !      | |||
+                            _/|     _/|-++'
+                        +  +--|    |--|--|_ |-
+                     { /|__|  |/__|  |--- |||__/
+                    +---------------___[}-_===_.'____
+                ____`-' ||___-{]_| _[}-  |     |_[___==--                _
+ __..._____--==/___]_|__|_____________________________[___==--____,------' . 7
+|                                                                     BB-61 /
+ o_________________________________________________________________________|"
   end
 end

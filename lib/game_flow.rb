@@ -5,9 +5,9 @@ require './lib/text'
 require './lib/game_logic'
 require './lib/cell'
 require './lib/firing_sequence'
+require 'colorize'
 
 class GameFlow
-
   attr_reader :text, :comp_ship_2, :comp_ship_3, :computer_board, :player_ship_2, :player_ship_3, :player_board, :game_logic, :player
 
   def initialize
@@ -15,8 +15,8 @@ class GameFlow
     @comp_ship_2 = Ship.new(2, "Orphaned puppy adventure cruise", "2")
     @comp_ship_3 = Ship.new(3, "Merchant vessel just doing its job", "3")
     @computer_board = GameBoard.new.create_board
-    @player_ship_2 = Ship.new(2, "Patrol Boat", "2")
-    @player_ship_3 = Ship.new(3, "Destroyer", "3")
+    @player_ship_2 = Ship.new(2, "Patrol Boat", '2')
+    @player_ship_3 = Ship.new(3, "Destroyer", '3')
     @player_board = GameBoard.new.create_board
     @game_logic = GameLogic.new
     @time = nil
@@ -29,19 +29,19 @@ class GameFlow
   end
 
   def quit_play_or_read(input)
-    if input == 'P' || input == 'PLAY'
+    if %w[P PLAY].include?(input)
       clear_screen
+      puts text.battleship_ascii
       @time = Time.now.to_i
       return
-    elsif input == 'Q'|| input == 'QUIT'
+    elsif %w[Q QUIT].include?(input)
       quit_the_game
-    elsif input == 'I' || input == 'INSTRUCTIONS'
+    elsif %w[I INSTRUCTIONS].include?(input)
       puts text.instruction_text
-      game_start
     else
       puts text.invalid_starting_choice_text
-      game_start
     end
+    game_start
   end
 
   def quit_the_game
@@ -79,15 +79,13 @@ class GameFlow
   end
 
   def get_valid_cell_positions_array(board)
-    valid_inputs = board.flatten.map do |cell|
-      cell.position
-    end
+    valid_inputs = board.flatten.map(&:position)
     return valid_inputs
   end
 
   def count_hits_on_ships(board)
     ship_hits = board.flatten.count do |cell|
-      cell.state == "H"
+      cell.state == 'H'.red
     end
     return ship_hits
   end
@@ -96,15 +94,27 @@ class GameFlow
     Time.now.to_i - @time
   end
 
+  def player_wins(shots_fired)
+    text.say_congratulations
+    puts text.congratulations_you_win_text
+    puts text.number_of_guesses_and_time_text(time_calculator, shots_fired)
+    long_pause
+    quit_the_game
+  end
+
+  def computer_wins(shots_fired)
+    puts text.loss_text
+    puts text.number_of_guesses_and_time_text(time_calculator, shots_fired)
+    long_pause
+    long_pause
+    quit_the_game
+  end
+
   def win_state(board, board_1, shots_fired)
     if count_hits_on_ships(board) == 5
-      text.say_congratulations
-      puts text.congratulations_you_win_text
-      puts text.number_of_guesses_and_time_text(time_calculator, shots_fired)
-      return true
+      player_wins(shots_fired)
     elsif count_hits_on_ships(board_1) == 5
-      puts text.loss_text
-      puts text.number_of_guesses_and_time_text(time_calculator, shots_fired)
+      computer_wins(shots_fired)
     else
       return false
     end
