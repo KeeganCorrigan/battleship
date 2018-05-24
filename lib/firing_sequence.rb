@@ -8,6 +8,7 @@ class FiringSequence
   def initialize(game)
     @game = game
     @shots_fired = 0
+    @speech_counter = 0
   end
 
   def player_fires_shots
@@ -32,10 +33,24 @@ class FiringSequence
     firing_counter
   end
 
+  def computer_begs_for_mercy
+    if count_hits_on_ships(@game.computer_board) == 1 && @speech_counter == 0
+      @game.text.say_have_mercy
+      @speech_counter += 1
+    elsif count_hits_on_ships(@game.computer_board) == 3 && @speech_counter == 1
+      @game.text.we_beg_you_for_peace
+      @speech_counter += 1
+    elsif count_hits_on_ships(@game.computer_board) == 4 && @speech_counter == 2
+      @game.text.we_do_not_deserve_this
+      @speech_counter += 1
+    end
+  end
+
   def player_fires(cell)
     fire_at_ships(cell)
     change_cell_state(cell, @game.computer_board)
     display_board(@game.computer_board, 'The Anonymous Enemy')
+    computer_begs_for_mercy
     puts @game.text.press_enter_to_continue
     @game.player_press_enter
     verify_computer_ship_sunk(cell)
@@ -58,9 +73,9 @@ class FiringSequence
     @game.small_pause
     fire_at_ships(cell)
     change_cell_state(cell, @game.player_board)
-    display_board(@game.player_board, 'The Player Board')
-    @game.long_pause
-    @game.long_pause
+    display_board(@game.player_board, 'The Aggressive Player')
+    puts @game.text.press_enter_to_continue
+    @game.player_press_enter
     @game.clear_screen
     verify_player_ship_sunk(cell)
   end

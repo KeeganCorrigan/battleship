@@ -78,6 +78,18 @@ class Text
     "That's a hit. You killed #{rand(2..100)} sailors."
   end
 
+  def say_have_mercy
+    `say Please have mercy`
+  end
+
+  def we_do_not_deserve_this
+    `say We do not deserve this`
+  end
+
+  def we_beg_you_for_peace
+    `say We beg you for peace`
+  end
+
   def confirm_player_miss_text
     "It's a miss. You failed to kill someone's family member."
   end
