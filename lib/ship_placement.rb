@@ -30,7 +30,7 @@ class ShipPlacement
     if validate_player_ship_placement_choices(input) == true
       return input.upcase.split(" ")
     else
-      p @game.text.invalid_input
+      puts @game.text.invalid_input
       input = @game.get_player_input
       get_player_ship_placement_choice(input)
     end

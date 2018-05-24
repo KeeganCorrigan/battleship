@@ -26,7 +26,7 @@ class Text
      ------------------
     To place a ship, use the following format: A1, A2\n
     ------------------
-    You will go first and will pick a square, typing it in by reference of column reference, row number (A3 for example). This represents firing a missile directly at that square. If the computer player has any part of one of their ships positioned on this square the map will update with an H. The computer will then fire and the player will be informed if it was a hit or a miss and they will see an updated. Once all ships on one side have been sunk the game is over."
+    You will go first and will pick a square, typing it in by reference of column reference, row number (A3 for example). This represents firing a missile directly at that square. If the computer player has any part of one of their ships positioned on this square the map will update with an H. The computer will then fire and the player will be informed if it was a hit or a miss and they will see an updated game board. Once all ships on one side have been sunk the game is over."
   end
 
   def begin_play_text
@@ -107,7 +107,7 @@ class Text
   end
 
   def confirm_computer_miss_text
-    "The computer missed you. The AI is very simple."
+    "The computer missed you. The AI is doing its best."
   end
 
   def press_enter_to_continue
@@ -115,7 +115,7 @@ class Text
   end
 
   def say_congratulations
-    `say You have continued the cycle of violence for another generation congratulations`
+    `say Congratulations You have continued the cycle of violence for another generation`
   end
 
   def congratulations_you_win_text
@@ -124,10 +124,6 @@ class Text
 
   def loss_text
     "You failed to destroy a simple machine. And died in the process."
-  end
-
-  def play_again_text
-    "Would you like to play again?"
   end
 
   def number_of_guesses_and_time_text(time, shots_fired)

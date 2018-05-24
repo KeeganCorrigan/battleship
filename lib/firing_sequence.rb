@@ -58,7 +58,8 @@ class FiringSequence
     @game.small_pause
     fire_at_ships(cell)
     change_cell_state(cell, @game.player_board)
-    display_board(@game.player_board, 'The Player')
+    display_board(@game.player_board, 'The Player Board')
+    @game.long_pause
     @game.long_pause
     @game.clear_screen
     verify_player_ship_sunk(cell)

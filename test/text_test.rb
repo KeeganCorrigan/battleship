@@ -36,4 +36,16 @@ class TextTest < Minitest::Test
     shots_fired = 9
     assert_equal "You fired 9 shots and it took 0 minutes and 1 seconds to complete the game.", text.number_of_guesses_and_time_text(total_time_played, shots_fired)
   end
+
+  def test_they_are_strings
+    text = Text.new
+    assert_equal String, text.instruction_text.class
+    assert_equal String, text.begin_play_text.class
+    assert_equal String, text.invalid_starting_choice_text.class
+    assert_equal String, text.player_places_two_unit_ship_text.class
+    assert_equal String, text.player_places_three_unit_ship_text.class
+    assert_equal String, text.invalid_input.class
+    assert_equal String, text.congratulations_you_win_text.class
+    assert_equal String, text.loss_text.class
+  end
 end
