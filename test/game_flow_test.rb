@@ -31,28 +31,11 @@ class GameFlowTest < Minitest::Test
     assert_equal 5, five_cells_with_ship.sum
   end
 
-  def test_get_valid_cell_positions_array
-    game = GameFlow.new
-    actual = game.get_valid_cell_positions_array(game.player_board)
-    assert_equal 'A1', actual[0]
-    assert_equal 'D4', actual[15]
-  end
-
   def test_time_calculator
     game = GameFlow.new
     game.quit_play_or_read('P')
     sleep(1)
     assert_equal 1, game.time_calculator
-  end
-
-  def test_count_hits_on_ships
-    game = GameFlow.new
-    fire = FiringSequence.new(game)
-    cell = game.player_board[0][0]
-    ship = Ship.new(1)
-    cell.ship = ship
-    fire.fire_at_ships(cell)
-    assert_equal 1, game.count_hits_on_ships(game.player_board)
   end
 
   def test_win_state

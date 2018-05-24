@@ -1,6 +1,9 @@
 require './lib/game_flow'
+require './lib/verify'
 
 class ShipPlacement
+  include Verify
+
   attr_accessor :cell_1, :cell_2, :cell_3
 
   def initialize(game = nil)
@@ -27,7 +30,7 @@ class ShipPlacement
     if validate_player_ship_placement_choices(input) == true
       return input.upcase.split(" ")
     else
-      p @game.text.invalid_input
+      puts @game.text.invalid_input
       input = @game.get_player_input
       get_player_ship_placement_choice(input)
     end
@@ -35,7 +38,7 @@ class ShipPlacement
 
   def validate_player_ship_placement_choices(input)
     input_array = input.split(' ')
-    valid_choices = @game.get_valid_cell_positions_array(@game.player_board)
+    valid_choices = get_valid_cell_positions_array(@game.player_board)
     if valid_choices.include?(input_array[0]) && valid_choices.include?(input_array[1]) && input_array.length == 2
       return true
     else
@@ -154,7 +157,7 @@ class ShipPlacement
   end
 
   def handle_overlapping_ships
-    no_overlapping_ships = @game.verify_no_ship_in_cell(@cell_1, @cell_2, @cell_3)
+    no_overlapping_ships = verify_no_ship_in_cell(@cell_1, @cell_2, @cell_3)
     if no_overlapping_ships == false
       p @game.text.ships_can_not_overlap
     end

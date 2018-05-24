@@ -2,8 +2,11 @@ require './lib/cell'
 require './lib/game_board'
 require './lib/ship'
 require './lib/game_flow'
+require './lib/verify'
 
 class GameLogic
+  include Verify
+
   attr_reader :first_coordinates, :second_coordinates, :third_coordinates
 
   def initialize(game = nil)
@@ -28,7 +31,7 @@ class GameLogic
       first_ship_cell =    @game.computer_board[first_coordinates[0]][first_coordinates[1]]
       second_ship_cell = @game.computer_board[second_coordinates[0]][second_coordinates[1]]
       third_ship_cell = @game.computer_board[third_coordinates[0]][third_coordinates[1]]
-      no_overlapping_ships = @game.verify_no_ship_in_cell(first_ship_cell, second_ship_cell, third_ship_cell)
+      no_overlapping_ships = verify_no_ship_in_cell(first_ship_cell, second_ship_cell, third_ship_cell)
     end
     first_ship_cell.ship = @game.comp_ship_3
     second_ship_cell.ship = @game.comp_ship_3
