@@ -96,6 +96,7 @@ class ShipPlacement
   end
 
   def get_player_ship_position
+    puts @game.text.begin_play_text
     puts @game.text.player_places_two_unit_ship_text
     @game.get_player_input
   end

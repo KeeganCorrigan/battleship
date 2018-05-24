@@ -103,7 +103,11 @@ class Text
   end
 
   def you_sunk_my_battleship
-    `say You Sunk My Battleship`
+    `say You Sunk My ship`
+  end
+
+  def suffering_continues
+    `say Our suffering continues`
   end
 
   def computer_sunk_a_battleship

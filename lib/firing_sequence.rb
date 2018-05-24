@@ -142,8 +142,9 @@ class FiringSequence
   def verify_computer_ship_sunk(cell)
     if !cell.ship.nil?
       if cell.ship.sunk == true
-        @game.text.you_sunk_my_battleship
         puts @game.text.confirm_computer_ship_was_sunk(cell.ship.name, cell.ship.size)
+        @game.text.you_sunk_my_battleship
+        @game.text.suffering_continues
         @game.small_pause
       end
     end
