@@ -1,6 +1,8 @@
 require 'colorize'
+require './lib/verify'
 
 class FiringSequence
+  include Verify
   attr_reader :shots_fired, :game
 
   def initialize(game)
@@ -98,7 +100,7 @@ class FiringSequence
   end
 
   def validate_cell_input(input)
-    if @game.get_valid_cell_positions_array(@game.computer_board).include?(input) != true
+    if get_valid_cell_positions_array(@game.computer_board).include?(input) != true
       return false
     else
       return true
@@ -118,7 +120,7 @@ class FiringSequence
   end
 
   def computer_fire_at_ships(board)
-    @game.get_valid_cell_positions_array(board).sample
+    get_valid_cell_positions_array(board).sample
   end
 
   def verify_computer_ship_sunk(cell)
